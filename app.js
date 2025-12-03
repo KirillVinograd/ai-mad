@@ -87,35 +87,65 @@ function renderHome() {
   const items = tests
     .map(
       (test) => `<article class="card">
-      <div class="card-header">
-        <div>
-          <div class="badge">${test.meta.name}</div>
-          <p class="muted">${test.meta.description}</p>
+        <div class="card-header compact">
+          <div>
+            <p class="eyebrow">методика</p>
+            <h3>${test.meta.name}</h3>
+            <p class="muted small">${test.meta.description}</p>
+          </div>
         </div>
-      </div>
-      <div class="card-actions">
-        <a class="button primary" href="/tests/${test.slug}/assessment">Пройти тест</a>
-      </div>
-    </article>`
+        <div class="card-actions">
+          <a class="button primary" href="/tests/${test.slug}/assessment">Запустить</a>
+          <a class="button ghost" href="/tests/${test.slug}/results">Результаты</a>
+        </div>
+      </article>`
     )
     .join('');
 
+  const primarySlug = tests[0]?.slug;
+
   const content = `<section class="hero">
-      <div>
-        <p class="eyebrow">конфиденциальное тестирование</p>
-        <h1>Психологическая диагностика<br/>для команды ai-mad</h1>
-        <p class="lead">Вопросники загружаются из конфигурации, результаты сразу готовы в едином формате JSON.</p>
+      <div class="hero-copy">
+        <p class="eyebrow">ai-mad · психологическое тестирование</p>
+        <h1>Профессиональная площадка для оценочных опросников</h1>
+        <p class="lead">Только необходимое: персональные данные, прохождение, готовый протокол. Доступ по приватным ссылкам, без отвлекающих блоков.</p>
+        <div class="cta-row">
+          <a class="button primary" href="${primarySlug ? `/tests/${primarySlug}/assessment` : '#'}">Начать</a>
+          <a class="button ghost" href="#tests">Выбрать методику</a>
+        </div>
       </div>
-      <div class="hero-panel">
-        <p>Выберите методику, чтобы начать процедуру.</p>
-        <ul>
-          <li>Сбор персональных данных перед началом</li>
-          <li>Навигация по страницам с прогресс-баром</li>
-          <li>Стандартизированный JSON протокол результатов</li>
-        </ul>
+      <div class="hero-panel tight">
+        <div class="panel-line">
+          <div class="panel-dot"></div>
+          <div>
+            <p class="muted small">Подготовка</p>
+            <strong>Готовые формы сбора данных</strong>
+          </div>
+        </div>
+        <div class="panel-line">
+          <div class="panel-dot"></div>
+          <div>
+            <p class="muted small">Прохождение</p>
+            <strong>Никаких лишних шагов, чистый интерфейс</strong>
+          </div>
+        </div>
+        <div class="panel-line">
+          <div class="panel-dot"></div>
+          <div>
+            <p class="muted small">Результат</p>
+            <strong>JSON и таблицы в один клик</strong>
+          </div>
+        </div>
       </div>
     </section>
-    <section class="grid">${items}</section>`;
+    <section class="section-title" id="tests">
+      <div>
+        <p class="eyebrow">методики</p>
+        <h2>Линейка тестов</h2>
+      </div>
+      <a class="pill-link" href="mailto:team@ai-mad.ru">Написать команде</a>
+    </section>
+    <section class="grid minimal-grid">${items}</section>`;
   return renderLayout('ai-mad.ru — тестирование', content);
 }
 
@@ -123,7 +153,7 @@ function renderAssessmentPage(test) {
   const content = `<section class="panel" id="test-root" data-test-slug="${test.slug}">
       <p class="eyebrow">${test.meta.name}</p>
       <h2>Персональные данные и прохождение</h2>
-      <p class="muted">Сначала заполните анкету участника, затем переходите к вопросам. Данные методики загружаются динамически из конфигурации.</p>
+      <p class="muted">Сначала заполните анкету участника, затем переходите к вопросам. Интерфейс адаптирован к новым цветам и лучше подходит для фокусированной работы.</p>
       <div class="test-shell">
         <div class="intake"></div>
         <div class="assessment hidden"></div>
@@ -157,7 +187,7 @@ function renderResultsPage(test, records) {
       <div class="table-wrapper">
         <table>
           <thead><tr><th>ФИО</th><th>Email</th><th>Возраст</th><th>Завершено</th><th></th></tr></thead>
-          <tbody>${rows}</tbody>
+      <tbody>${rows}</tbody>
         </table>
       </div>
     </section>`;
