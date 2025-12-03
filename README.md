@@ -1,1 +1,60 @@
 # ai-mad
+
+Одностраничное приложение на Node.js для проведения базовых версий тестов СМИЛ/MMPI, опросника Шмишека, EPI и ПДО. Участник вводит персональные данные и сразу переходит к вопросам; результаты доступны только по закрытой ссылке `/tests/:slug/results`.
+
+## Запуск
+
+Без внешних зависимостей — используется только стандартная библиотека Node.js.
+
+```bash
+node app.js
+```
+
+Сервер будет доступен на http://localhost:3000.
+
+### Запуск через Docker Compose
+
+Файл `docker-compose.yml` оформлен в стиле многосервисных стеков: Node.js-приложение и фронтовой Nginx. Запуск по аналогии с примером из вопроса:
+
+```bash
+docker compose up --build -d
+```
+
+Что внутри:
+
+- `app` — билд из `Dockerfile`, переменные `NODE_ENV` и `PORT`, healthcheck, том `data` → `/usr/src/app/data` для сохранения `data/responses.json` между перезапусками (при желании можно заменить на bind mount `./data:/usr/src/app/data`).
+- `nginx` — образ `nginx:alpine`, публикует порт 80:80 и использует конфигурацию из `nginx-ai-mad.conf` для проксирования на сервис `app`.
+
+Контейнеры перезапускаются с политикой `unless-stopped`. Проброса порта 3000 наружу не требуется — наружу отдаёт только Nginx.
+
+### Привязка домена, если на сервере несколько сайтов
+
+1. Поднимите контейнеры (`docker compose up -d`). Внутри сети compose приложение слушает `app:3000`.
+2. Конфиг `nginx-ai-mad.conf` в комплекте сразу проксирует `ai-mad.ru` на сервис `app`:
+
+   ```nginx
+   server {
+       listen 80;
+       server_name ai-mad.ru www.ai-mad.ru;
+
+       location / {
+           proxy_pass http://app:3000;
+           proxy_set_header Host $host;
+           proxy_set_header X-Real-IP $remote_addr;
+           proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+           proxy_set_header X-Forwarded-Proto $scheme;
+       }
+   }
+   ```
+
+3. Если хотите использовать внешний Nginx на хосте, сохраните конфиг в `/etc/nginx/sites-available/ai-mad.conf`, создайте симлинк в `sites-enabled` и выполните `nginx -t && systemctl reload nginx`. Прокси-адрес в таком случае оставьте `http://127.0.0.1:3000;`.
+4. Для второго сайта используйте отдельный серверный блок с его доменом — так оба проекта будут работать на одном сервере без конфликтов портов.
+
+## Структура
+
+- `/` — выбор методики и кнопка «Пройти тест».
+- `/tests/:slug/assessment` — страница ввода персональных данных и последующего прохождения теста.
+- `/tests/:slug/complete?id=...` — персональные результаты.
+- `/tests/:slug/results` — сводная таблица (не размещайте публично).
+
+Данные сохраняются в `data/responses.json`.
