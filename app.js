@@ -89,7 +89,6 @@ function renderHome() {
       (test) => `<article class="card">
         <div class="card-header compact">
           <div>
-            <p class="eyebrow">методика</p>
             <h3>${test.meta.name}</h3>
             <p class="muted small">${test.meta.description}</p>
           </div>
@@ -103,7 +102,6 @@ function renderHome() {
 
   const content = `<section class="section-title" id="tests">
       <div>
-        <p class="eyebrow">методики</p>
         <h1>Линейка тестов</h1>
         <p class="muted">Запустите нужную методику и получите протокол без лишних экранов.</p>
       </div>
