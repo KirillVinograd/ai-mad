@@ -87,35 +87,28 @@ function renderHome() {
   const items = tests
     .map(
       (test) => `<article class="card">
-      <div class="card-header">
-        <div>
-          <div class="badge">${test.meta.name}</div>
-          <p class="muted">${test.meta.description}</p>
+        <div class="card-header compact">
+          <div>
+            <p class="eyebrow">методика</p>
+            <h3>${test.meta.name}</h3>
+            <p class="muted small">${test.meta.description}</p>
+          </div>
         </div>
-      </div>
-      <div class="card-actions">
-        <a class="button primary" href="/tests/${test.slug}/assessment">Пройти тест</a>
-      </div>
-    </article>`
+        <div class="card-actions">
+          <a class="button primary" href="/tests/${test.slug}/assessment">Запустить</a>
+        </div>
+      </article>`
     )
     .join('');
 
-  const content = `<section class="hero">
+  const content = `<section class="section-title" id="tests">
       <div>
-        <p class="eyebrow">конфиденциальное тестирование</p>
-        <h1>Психологическая диагностика<br/>для команды ai-mad</h1>
-        <p class="lead">Вопросники загружаются из конфигурации, результаты сразу готовы в едином формате JSON.</p>
-      </div>
-      <div class="hero-panel">
-        <p>Выберите методику, чтобы начать процедуру.</p>
-        <ul>
-          <li>Сбор персональных данных перед началом</li>
-          <li>Навигация по страницам с прогресс-баром</li>
-          <li>Стандартизированный JSON протокол результатов</li>
-        </ul>
+        <p class="eyebrow">методики</p>
+        <h1>Линейка тестов</h1>
+        <p class="muted">Запустите нужную методику и получите протокол без лишних экранов.</p>
       </div>
     </section>
-    <section class="grid">${items}</section>`;
+    <section class="grid minimal-grid">${items}</section>`;
   return renderLayout('ai-mad.ru — тестирование', content);
 }
 
@@ -123,7 +116,7 @@ function renderAssessmentPage(test) {
   const content = `<section class="panel" id="test-root" data-test-slug="${test.slug}">
       <p class="eyebrow">${test.meta.name}</p>
       <h2>Персональные данные и прохождение</h2>
-      <p class="muted">Сначала заполните анкету участника, затем переходите к вопросам. Данные методики загружаются динамически из конфигурации.</p>
+      <p class="muted">Сначала заполните анкету участника, затем переходите к вопросам. Интерфейс адаптирован к новым цветам и лучше подходит для фокусированной работы.</p>
       <div class="test-shell">
         <div class="intake"></div>
         <div class="assessment hidden"></div>
@@ -152,12 +145,11 @@ function renderResultsPage(test, records) {
   const content = `<section class="panel">
       <p class="eyebrow">${test.meta.name}</p>
       <h2>Сводная таблица результатов</h2>
-      <p class="muted">Ссылка конфиденциальна: /tests/${test.slug}/results. Не передавайте её участникам.</p>
       ${highlight}
       <div class="table-wrapper">
         <table>
           <thead><tr><th>ФИО</th><th>Email</th><th>Возраст</th><th>Завершено</th><th></th></tr></thead>
-          <tbody>${rows}</tbody>
+      <tbody>${rows}</tbody>
         </table>
       </div>
     </section>`;
