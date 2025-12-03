@@ -102,7 +102,7 @@ function renderHome() {
 
   const content = `<section class="section-title" id="tests">
       <div>
-        <h1>Линейка тестов</h1>
+        <h1>Линейка методик</h1>
         <p class="muted">Запустите нужную методику и получите протокол без лишних экранов.</p>
       </div>
       <a class="pill-link" href="mailto:team@ai-mad.ru">Написать команде</a>
