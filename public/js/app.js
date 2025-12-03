@@ -229,6 +229,14 @@ function renderResults(container, test, person, result) {
   }
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('a').forEach((link) => {
+    if (link.textContent.trim() === 'Написать команде') {
+      link.remove();
+    }
+  });
+});
+
 async function bootstrapTest(root) {
   const slug = root.dataset.testSlug;
   const intake = root.querySelector('.intake');
