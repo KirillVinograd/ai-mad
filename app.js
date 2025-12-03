@@ -96,7 +96,6 @@ function renderHome() {
         </div>
         <div class="card-actions">
           <a class="button primary" href="/tests/${test.slug}/assessment">Запустить</a>
-          <a class="button ghost" href="/tests/${test.slug}/results">Результаты</a>
         </div>
       </article>`
     )
@@ -182,7 +181,6 @@ function renderResultsPage(test, records) {
   const content = `<section class="panel">
       <p class="eyebrow">${test.meta.name}</p>
       <h2>Сводная таблица результатов</h2>
-      <p class="muted">Ссылка конфиденциальна: /tests/${test.slug}/results. Не передавайте её участникам.</p>
       ${highlight}
       <div class="table-wrapper">
         <table>
