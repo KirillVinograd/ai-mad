@@ -186,18 +186,19 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 3px 10px;
-  min-height: auto;
+  padding: 2px 12px;
+  min-height: 0;
   min-width: 0;
   height: auto;
-  border-radius: 10px;
+  border-radius: 8px;
   font-weight: 700;
   font-size: 13px;
-  line-height: 1;
+  line-height: 1.05;
   text-decoration: none;
   border: 1px solid var(--border);
   color: var(--text);
   cursor: pointer;
+  appearance: none;
   transition: border 0.2s ease, background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
