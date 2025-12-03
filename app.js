@@ -87,15 +87,15 @@ function renderHome() {
   const items = tests
     .map(
       (test) => `<article class="card">
-        <div class="card-header">
+        <div class="card-header compact">
           <div>
-            <div class="badge">${test.meta.name}</div>
-            <p class="muted">${test.meta.description}</p>
+            <p class="eyebrow">методика</p>
+            <h3>${test.meta.name}</h3>
+            <p class="muted small">${test.meta.description}</p>
           </div>
-          <span class="pill-link">JSON готов</span>
         </div>
         <div class="card-actions">
-          <a class="button primary" href="/tests/${test.slug}/assessment">Пройти тест</a>
+          <a class="button primary" href="/tests/${test.slug}/assessment">Запустить</a>
           <a class="button ghost" href="/tests/${test.slug}/results">Результаты</a>
         </div>
       </article>`
@@ -106,38 +106,46 @@ function renderHome() {
 
   const content = `<section class="hero">
       <div class="hero-copy">
-        <p class="eyebrow">конфиденциальное тестирование</p>
-        <h1>Новый облик платформы ai-mad</h1>
-        <p class="lead">Пройдите психологические опросники в едином цифровом стиле. Мы аккуратно работаем с данными,
-        поддерживаем бизнес и образовательные команды и выдаём готовые отчёты сразу после прохождения.</p>
-        <div class="pill-row">
-          <a class="button primary" href="${primarySlug ? `/tests/${primarySlug}/assessment` : '#'}">Начать прохождение</a>
-          <a class="pill-link" href="#tests">Посмотреть методики</a>
-        </div>
-        <div class="stat-grid">
-          <div class="stat"><strong>5 минут</strong><span class="muted">на запуск теста</span></div>
-          <div class="stat"><strong>JSON</strong><span class="muted">готовый протокол</span></div>
-          <div class="stat"><strong>24/7</strong><span class="muted">доступ к результатам</span></div>
+        <p class="eyebrow">ai-mad · психологическое тестирование</p>
+        <h1>Профессиональная площадка для оценочных опросников</h1>
+        <p class="lead">Только необходимое: персональные данные, прохождение, готовый протокол. Доступ по приватным ссылкам, без отвлекающих блоков.</p>
+        <div class="cta-row">
+          <a class="button primary" href="${primarySlug ? `/tests/${primarySlug}/assessment` : '#'}">Начать</a>
+          <a class="button ghost" href="#tests">Выбрать методику</a>
         </div>
       </div>
-      <div class="hero-panel">
-        <p class="muted">Выберите методику и запустите процедуру без сложных настроек.</p>
-        <ul>
-          <li>Сбор персональных данных перед стартом</li>
-          <li>Чёткая навигация по страницам и прогресс</li>
-          <li>Автоматический расчёт шкал и уровней</li>
-          <li>Приватные ссылки на таблицу результатов</li>
-        </ul>
+      <div class="hero-panel tight">
+        <div class="panel-line">
+          <div class="panel-dot"></div>
+          <div>
+            <p class="muted small">Подготовка</p>
+            <strong>Готовые формы сбора данных</strong>
+          </div>
+        </div>
+        <div class="panel-line">
+          <div class="panel-dot"></div>
+          <div>
+            <p class="muted small">Прохождение</p>
+            <strong>Никаких лишних шагов, чистый интерфейс</strong>
+          </div>
+        </div>
+        <div class="panel-line">
+          <div class="panel-dot"></div>
+          <div>
+            <p class="muted small">Результат</p>
+            <strong>JSON и таблицы в один клик</strong>
+          </div>
+        </div>
       </div>
     </section>
     <section class="section-title" id="tests">
       <div>
         <p class="eyebrow">методики</p>
-        <h2>Доступные тесты</h2>
+        <h2>Линейка тестов</h2>
       </div>
-      <a class="pill-link" href="mailto:team@ai-mad.ru">Нужна помощь?</a>
+      <a class="pill-link" href="mailto:team@ai-mad.ru">Написать команде</a>
     </section>
-    <section class="grid">${items}</section>`;
+    <section class="grid minimal-grid">${items}</section>`;
   return renderLayout('ai-mad.ru — тестирование', content);
 }
 
