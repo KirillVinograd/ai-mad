@@ -135,6 +135,7 @@ function renderHome() {
         <p class="eyebrow">методики</p>
         <h2>Линейка тестов</h2>
       </div>
+      <a class="pill-link" href="mailto:team@ai-mad.ru">Написать команде</a>
     </section>
     <section class="grid minimal-grid">${items}</section>`;
   return renderLayout('ai-mad.ru — тестирование', content);
