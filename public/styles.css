@@ -186,13 +186,13 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 7px 14px;
-  min-height: 32px;
-  min-width: 132px;
+  padding: 5px 12px;
+  min-height: 0;
+  min-width: 120px;
   border-radius: 10px;
   font-weight: 700;
-  font-size: 13px;
-  line-height: 1.15;
+  font-size: 12px;
+  line-height: 1.1;
   text-decoration: none;
   border: 1px solid var(--border);
   color: var(--text);
