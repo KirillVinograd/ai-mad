@@ -98,14 +98,14 @@ function renderHome() {
       <div>
         <p class="eyebrow">конфиденциальное тестирование</p>
         <h1>Психологическая диагностика<br/>для команды ai-mad</h1>
-        <p class="lead">Перед началом участник вводит персональные данные, после чего сразу переходит к вопросам. Итоги доступны только специалистам по закрытой ссылке /results.</p>
+        <p class="lead">Перед началом участник вводит персональные данные, после чего сразу переходит к вопросам.</p>
       </div>
       <div class="hero-panel">
         <p>Выберите методику, чтобы начать процедуру.</p>
         <ul>
           <li>Ввод персональных данных перед началом</li>
           <li>Стандартизированные вопросы с балльной оценкой</li>
-          <li>Сводная таблица результатов для специалистов</li>
+          <li>Сводная таблица результатов</li>
         </ul>
       </div>
     </section>
@@ -114,35 +114,43 @@ function renderHome() {
 }
 
 function renderAssessment(test, record, message) {
-  const warning = record
-    ? ''
-    : `<div class="alert">Для персонализации результатов сначала заполните данные участника — сразу после этого откроются вопросы.</div>`;
+  if (!record) {
+    const intakeForm = `<section class="panel">
+        <p class="eyebrow">${test.name}</p>
+        <h2>Персональные данные участника</h2>
+        <p class="muted">Сначала заполните анкету участника. После сохранения автоматически откроются вопросы теста.</p>
+        ${message ? `<div class="alert">${message}</div>` : ''}
+        <form method="POST" action="/tests/${test.slug}/assessment" class="form-grid">
+          <label>ФИО<input required name="fullName" placeholder="Иванов Иван"/></label>
+          <label>Email<input type="email" name="email" placeholder="example@domain.ru"/></label>
+          <label>Телефон<input name="phone" placeholder="+7 (___) ___-__-__"/></label>
+          <label>Возраст<input name="age" type="number" min="12" max="99" placeholder="28"/></label>
+          <label>Пол<select name="gender">
+            <option value="">Не выбран</option>
+            <option value="female">Женский</option>
+            <option value="male">Мужской</option>
+            <option value="other">Другое</option>
+          </select></label>
+          <label>Место учёбы / работы<input name="organization" placeholder="Компания, вуз, школа"/></label>
+          <label>Должность / роль<input name="position" placeholder="Специалист, студент, руководитель"/></label>
+          <label class="span-2">Комментарий/пожелания<textarea name="notes" rows="3" placeholder="Дополнительная информация для специалиста"></textarea></label>
+          <div class="form-actions span-2">
+            <button class="button primary" type="submit">Сохранить данные и начать тест</button>
+            <a class="button ghost" href="/">Назад</a>
+          </div>
+        </form>
+      </section>`;
+    return renderLayout(`${test.name} — анкетирование`, intakeForm);
+  }
 
-  const personSection = record
-    ? `<div class="person-card">
+  const personSection = `<div class="person-card">
         <div>
           <div class="badge">${record.person.fullName || 'Участник без ФИО'}</div>
           <p class="muted">Email: ${record.person.email || '—'} · Телефон: ${record.person.phone || '—'}</p>
+          <p class="muted">Место учёбы/работы: ${record.person.organization || '—'} · Должность: ${record.person.position || '—'}</p>
         </div>
         <div class="muted">Создано: ${new Date(record.createdAt).toLocaleString('ru-RU')}</div>
-      </div>`
-    : `<form method="POST" action="/tests/${test.slug}/assessment" class="form-grid">
-        <label>ФИО<input required name="fullName" placeholder="Иванов Иван"/></label>
-        <label>Email<input type="email" name="email" placeholder="example@domain.ru"/></label>
-        <label>Телефон<input name="phone" placeholder="+7 (___) ___-__-__"/></label>
-        <label>Возраст<input name="age" type="number" min="12" max="99" placeholder="28"/></label>
-        <label>Пол<select name="gender">
-          <option value="">Не выбран</option>
-          <option value="female">Женский</option>
-          <option value="male">Мужской</option>
-          <option value="other">Другое</option>
-        </select></label>
-        <label class="span-2">Комментарий/пожелания<textarea name="notes" rows="3" placeholder="Дополнительная информация для специалиста"></textarea></label>
-        <div class="form-actions span-2">
-          <button class="button primary" type="submit">Сохранить данные и начать тест</button>
-          <a class="button ghost" href="/">Назад</a>
-        </div>
-      </form>`;
+      </div>`;
   const questionsMarkup = test.questions
     .map(
       (question, index) => `<div class="question">
@@ -153,9 +161,7 @@ function renderAssessment(test, record, message) {
         <div class="options">
           ${[1, 2, 3, 4, 5]
             .map(
-              (value) => `<label class="option"><input type="radio" name="${question.id}" value="${value}" required ${
-                record ? '' : 'disabled'
-              }/><span>${value} ${value === 1 ? '— совершенно не согласен' : value === 5 ? '— полностью согласен' : ''}</span></label>`
+              (value) => `<label class="option"><input type="radio" name="${question.id}" value="${value}" required/><span>${value} ${value === 1 ? '— совершенно не согласен' : value === 5 ? '— полностью согласен' : ''}</span></label>`
             )
             .join('')}
         </div>
@@ -165,15 +171,14 @@ function renderAssessment(test, record, message) {
 
   const content = `<section class="panel">
       <p class="eyebrow">${test.name}</p>
-      <h2>Персональные данные и тестирование</h2>
-      <p class="muted">Сначала заполните персональные данные, затем ответьте на утверждения по шкале от 1 до 5. Результаты сохраняются и доступны специалисту по закрытой ссылке /results.</p>
-      ${warning}
+      <h2>Тестирование</h2>
+      <p class="muted">Ответьте на утверждения по шкале от 1 до 5. Результаты сохраняются и доступны специалисту по закрытой ссылке /results.</p>
       ${personSection}
       <form method="POST" action="/tests/${test.slug}/assessment" class="question-list">
-        <input type="hidden" name="recordId" value="${record ? record.id : ''}" />
+        <input type="hidden" name="recordId" value="${record.id}" />
         ${questionsMarkup}
         <div class="form-actions">
-          <button class="button primary" type="submit" ${record ? '' : 'disabled'}>Завершить тест</button>
+          <button class="button primary" type="submit">Завершить тест</button>
         </div>
         ${message ? `<p class="muted">${message}</p>` : ''}
       </form>
@@ -236,6 +241,7 @@ function renderComplete(test, record) {
         <div>
           <div class="badge">${record.person.fullName || 'Участник без ФИО'}</div>
           <p class="muted">Email: ${record.person.email || '—'} · Телефон: ${record.person.phone || '—'}</p>
+          <p class="muted">Место учёбы/работы: ${record.person.organization || '—'} · Должность: ${record.person.position || '—'}</p>
         </div>
         <div class="muted">Дата: ${new Date(record.finishedAt).toLocaleString('ru-RU')}</div>
       </div>
@@ -248,7 +254,6 @@ function renderComplete(test, record) {
       <p class="muted">Комментарий участника: ${record.person.notes || '—'}</p>
       <div class="form-actions">
         <a class="button ghost" href="/">На главную</a>
-        <a class="button ghost" href="/tests/${test.slug}/results">Таблица результатов</a>
       </div>
     </section>`;
   return renderLayout(`${test.name} — результаты`, content);
@@ -261,6 +266,8 @@ function renderResults(test, records) {
         <td>${record.person.fullName || '—'}</td>
         <td>${record.person.email || '—'}</td>
         <td>${record.person.phone || '—'}</td>
+        <td>${record.person.organization || '—'}</td>
+        <td>${record.person.position || '—'}</td>
         <td>${record.person.age || '—'}</td>
         <td>${new Date(record.finishedAt).toLocaleString('ru-RU')}</td>
         <td><a class="button ghost" href="/tests/${test.slug}/results/${record.id}">Открыть результаты</a></td>
@@ -279,7 +286,7 @@ function renderResults(test, records) {
       ${highlight}
       <div class="table-wrapper">
         <table>
-          <thead><tr><th>ФИО</th><th>Email</th><th>Телефон</th><th>Возраст</th><th>Завершено</th><th></th></tr></thead>
+          <thead><tr><th>ФИО</th><th>Email</th><th>Телефон</th><th>Место учёбы/работы</th><th>Должность</th><th>Возраст</th><th>Завершено</th><th></th></tr></thead>
           <tbody>${rows}</tbody>
         </table>
       </div>
