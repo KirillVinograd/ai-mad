@@ -186,28 +186,29 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 12px 18px;
-  min-height: 44px;
-  min-width: 140px;
-  border-radius: 12px;
+  padding: 7px 14px;
+  min-height: 32px;
+  min-width: 132px;
+  border-radius: 10px;
   font-weight: 700;
-  font-size: 15px;
+  font-size: 13px;
+  line-height: 1.15;
   text-decoration: none;
   border: 1px solid var(--border);
   color: var(--text);
   cursor: pointer;
-  transition: border 0.2s ease, background 0.2s ease, transform 0.2s ease;
+  transition: border 0.2s ease, background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .button.primary {
   background: linear-gradient(135deg, #d9b48f, #b57d52);
   color: #2f241b;
   border: 1px solid rgba(173, 111, 68, 0.35);
-  box-shadow: var(--shadow);
+  box-shadow: 0 12px 28px rgba(116, 82, 55, 0.18);
 }
 
 .button.ghost {
-  background: transparent;
+  background: rgba(196, 139, 99, 0.06);
 }
 
 .button:hover {
