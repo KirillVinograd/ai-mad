@@ -1,24 +1,44 @@
 const tests = [
   {
-    slug: 'smil-mmpi',
-    name: 'Тест СМИЛ / MMPI',
-    description: 'Сокращенная адаптация СМИЛ (MMPI) по методичке Собчик Л. Н.',
+    slug: 'mlo-am',
+    name: 'МЛО-АМ (Многоуровневый личностный опросник «Адаптивность»)',
+    description: 'Комплексная оценка адаптивных ресурсов и личностных качеств по методике МЛО-АМ.',
     scales: [
-      { key: 'validity', label: 'L – достоверность', detail: 'Оценка тенденции к социально-желательным ответам.' },
-      { key: 'anxiety', label: 'F – тревожность', detail: 'Обобщенный уровень напряжения и эмоциональной нестабильности.' },
-      { key: 'control', label: 'K – контроль', detail: 'Самоконтроль и способность открыто говорить о трудностях.' },
-      { key: 'somatic', label: 'Hs – соматизация', detail: 'Склонность фокусироваться на телесных ощущениях.' },
-      { key: 'depression', label: 'D – депрессия', detail: 'Сниженный фон настроения и утомляемость.' }
+      { key: 'adaptivity', label: 'Интегральная адаптивность', detail: 'Обобщённый показатель готовности к изменениям и восстанавливаемости.' },
+      { key: 'neuro_resilience', label: 'Нервно‑психическая устойчивость', detail: 'Толерантность к стрессу и эмоциональное равновесие.' },
+      { key: 'behavior_regulation', label: 'Поведенческая регуляция', detail: 'Самоконтроль, соблюдение норм и структурирование действий.' },
+      { key: 'moral_norms', label: 'Моральная нормативность', detail: 'Следование правилам, честность и социальная надёжность.' },
+      { key: 'communication', label: 'Коммуникативный потенциал', detail: 'Готовность к взаимодействию, способность слышать и убеждать.' },
+      { key: 'self_acceptance', label: 'Самопринятие', detail: 'Удовлетворённость собой и принятие собственных особенностей.' },
+      { key: 'self_regulation', label: 'Саморегуляция', detail: 'Управление эмоциями, импульсами и ресурсами энергии.' },
+      { key: 'motivation', label: 'Мотивация достижения', detail: 'Стремление к целям, настойчивость и ориентация на результат.' },
+      { key: 'flexibility', label: 'Поведенческая гибкость', detail: 'Готовность менять подход и искать альтернативные решения.' },
+      { key: 'social_inclusion', label: 'Социальная включённость', detail: 'Чувство принадлежности, принятие окружающих и кооперация.' },
+      {
+        key: 'integral_index',
+        label: 'Сводный индекс адаптивности',
+        detail: 'Среднее по базовым шкалам МЛО-АМ: адаптивные ресурсы, устойчивость, нормы и коммуникация.',
+        formula(scores) {
+          const baseKeys = ['adaptivity', 'neuro_resilience', 'behavior_regulation', 'moral_norms', 'communication'];
+          const values = baseKeys.map((k) => scores[k]?.normalized || 0);
+          const normalized = values.length ? Math.round((values.reduce((a, b) => a + b, 0) / values.length) * 10) / 10 : 0;
+          return { raw: values.reduce((a, b) => a + b, 0), normalized };
+        }
+      }
     ],
     questions: [
-      { id: 'smil_q1', text: 'Я стараюсь произвести впечатление безупречного человека.', scaleWeights: { validity: 1, control: 1 } },
-      { id: 'smil_q2', text: 'Мне трудно расслабиться и не думать о проблемах.', scaleWeights: { anxiety: 1, depression: 1 } },
-      { id: 'smil_q3', text: 'Я редко задумываюсь о своем здоровье.', scaleWeights: { somatic: -1, control: 1 } },
-      { id: 'smil_q4', text: 'Близкие считают меня слишком осторожным.', scaleWeights: { validity: 1, anxiety: 1 } },
-      { id: 'smil_q5', text: 'В стрессовых ситуациях я сохраняю самообладание.', scaleWeights: { control: 2, anxiety: -1 } },
-      { id: 'smil_q6', text: 'Иногда я ощущаю беспричинную усталость.', scaleWeights: { depression: 2, somatic: 1 } },
-      { id: 'smil_q7', text: 'Мне сложно открыто говорить о своих переживаниях.', scaleWeights: { control: -1, anxiety: 1 } },
-      { id: 'smil_q8', text: 'Мои сомнения часто мешают принять решение.', scaleWeights: { depression: 1, anxiety: 2 } }
+      { id: 'mlo_q1', text: 'Легко включаюсь в новые условия и быстро в них ориентируюсь.', scaleWeights: { adaptivity: 2, flexibility: 1, neuro_resilience: 1 } },
+      { id: 'mlo_q2', text: 'Даже под давлением сохраняю спокойствие и контроль над собой.', scaleWeights: { neuro_resilience: 2, self_regulation: 2 } },
+      { id: 'mlo_q3', text: 'Стараюсь действовать по правилам и доводить дела до конца.', scaleWeights: { behavior_regulation: 2, moral_norms: 1, motivation: 1 } },
+      { id: 'mlo_q4', text: 'Мне легко слушать собеседника и договариваться.', scaleWeights: { communication: 2, social_inclusion: 1 } },
+      { id: 'mlo_q5', text: 'Чувствую уверенность в себе и принимаю свои особенности.', scaleWeights: { self_acceptance: 2, self_regulation: 1 } },
+      { id: 'mlo_q6', text: 'Ставлю конкретные цели и настойчиво иду к ним.', scaleWeights: { motivation: 2, behavior_regulation: 1 } },
+      { id: 'mlo_q7', text: 'В сложностях ищу варианты, а не застреваю на проблеме.', scaleWeights: { flexibility: 2, adaptivity: 1, neuro_resilience: 1 } },
+      { id: 'mlo_q8', text: 'Стараюсь быть честным и ответственным даже в мелочах.', scaleWeights: { moral_norms: 2, self_regulation: 1 } },
+      { id: 'mlo_q9', text: 'Поддержка других важна для меня, и я готов её принимать и давать.', scaleWeights: { social_inclusion: 2, communication: 1, self_acceptance: 1 } },
+      { id: 'mlo_q10', text: 'В эмоционально напряжённых ситуациях я сохраняю рациональность.', scaleWeights: { neuro_resilience: 1, self_regulation: 2 } },
+      { id: 'mlo_q11', text: 'Я не боюсь корректировать план, если вижу лучший путь.', scaleWeights: { flexibility: 2, adaptivity: 1, motivation: 1 } },
+      { id: 'mlo_q12', text: 'Принимаю ответственность за последствия своих решений.', scaleWeights: { moral_norms: 1, behavior_regulation: 1, self_regulation: 1, adaptivity: 1 } }
     ]
   },
   {

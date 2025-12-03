@@ -88,8 +88,7 @@ function renderHome() {
         </div>
       </div>
       <div class="card-actions">
-        <a class="button primary" href="/tests/${test.slug}/intake">Заполнить данные</a>
-        <a class="button ghost" href="/tests/${test.slug}/assessment">Пройти тест</a>
+        <a class="button primary" href="/tests/${test.slug}/assessment">Пройти тест</a>
       </div>
     </article>`
     )
@@ -99,12 +98,12 @@ function renderHome() {
       <div>
         <p class="eyebrow">конфиденциальное тестирование</p>
         <h1>Психологическая диагностика<br/>для команды ai-mad</h1>
-        <p class="lead">Каждый опросник имеет отдельные ссылки для ввода данных, прохождения теста и просмотра результатов. Результаты доступны только по закрытой ссылке /results.</p>
+        <p class="lead">Перед началом участник вводит персональные данные, после чего сразу переходит к вопросам. Итоги доступны только специалистам по закрытой ссылке /results.</p>
       </div>
       <div class="hero-panel">
         <p>Выберите методику, чтобы начать процедуру.</p>
         <ul>
-          <li>Сбор персональных данных перед тестом</li>
+          <li>Ввод персональных данных перед началом</li>
           <li>Стандартизированные вопросы с балльной оценкой</li>
           <li>Сводная таблица результатов для специалистов</li>
         </ul>
@@ -114,12 +113,20 @@ function renderHome() {
   return renderLayout('ai-mad.ru — тестирование', content);
 }
 
-function renderIntake(test) {
-  const content = `<section class="panel">
-      <p class="eyebrow">${test.name}</p>
-      <h2>Заполнение исходных данных</h2>
-      <p class="muted">ФИО, контакты и дополнительные сведения нужны для корректной идентификации и консультации специалистов.</p>
-      <form method="POST" action="/tests/${test.slug}/intake" class="form-grid">
+function renderAssessment(test, record, message) {
+  const warning = record
+    ? ''
+    : `<div class="alert">Для персонализации результатов сначала заполните данные участника — сразу после этого откроются вопросы.</div>`;
+
+  const personSection = record
+    ? `<div class="person-card">
+        <div>
+          <div class="badge">${record.person.fullName || 'Участник без ФИО'}</div>
+          <p class="muted">Email: ${record.person.email || '—'} · Телефон: ${record.person.phone || '—'}</p>
+        </div>
+        <div class="muted">Создано: ${new Date(record.createdAt).toLocaleString('ru-RU')}</div>
+      </div>`
+    : `<form method="POST" action="/tests/${test.slug}/assessment" class="form-grid">
         <label>ФИО<input required name="fullName" placeholder="Иванов Иван"/></label>
         <label>Email<input type="email" name="email" placeholder="example@domain.ru"/></label>
         <label>Телефон<input name="phone" placeholder="+7 (___) ___-__-__"/></label>
@@ -132,18 +139,10 @@ function renderIntake(test) {
         </select></label>
         <label class="span-2">Комментарий/пожелания<textarea name="notes" rows="3" placeholder="Дополнительная информация для специалиста"></textarea></label>
         <div class="form-actions span-2">
-          <button class="button primary" type="submit">Сохранить и перейти к тесту</button>
+          <button class="button primary" type="submit">Сохранить данные и начать тест</button>
           <a class="button ghost" href="/">Назад</a>
         </div>
-      </form>
-    </section>`;
-  return renderLayout(`${test.name} — данные`, content);
-}
-
-function renderAssessment(test, record, message) {
-  const warning = record
-    ? ''
-    : `<div class="alert">Для персонализации результатов сначала заполните данные участника.</div>`;
+      </form>`;
   const questionsMarkup = test.questions
     .map(
       (question, index) => `<div class="question">
@@ -166,15 +165,15 @@ function renderAssessment(test, record, message) {
 
   const content = `<section class="panel">
       <p class="eyebrow">${test.name}</p>
-      <h2>Прохождение теста</h2>
-      <p class="muted">Ответьте на утверждения по шкале от 1 до 5. Результаты сохраняются и доступны специалисту по закрытой ссылке /results.</p>
+      <h2>Персональные данные и тестирование</h2>
+      <p class="muted">Сначала заполните персональные данные, затем ответьте на утверждения по шкале от 1 до 5. Результаты сохраняются и доступны специалисту по закрытой ссылке /results.</p>
       ${warning}
+      ${personSection}
       <form method="POST" action="/tests/${test.slug}/assessment" class="question-list">
         <input type="hidden" name="recordId" value="${record ? record.id : ''}" />
         ${questionsMarkup}
         <div class="form-actions">
           <button class="button primary" type="submit" ${record ? '' : 'disabled'}>Завершить тест</button>
-          <a class="button ghost" href="/tests/${test.slug}/intake">Заполнить данные</a>
         </div>
         ${message ? `<p class="muted">${message}</p>` : ''}
       </form>
@@ -205,7 +204,22 @@ function calculateScores(test, answers) {
     const normalized = data.count ? Math.round((data.raw / data.count) * 10) / 10 : 0;
     summarized[key] = { raw: data.raw, normalized };
   });
-  return summarized;
+
+  const finalScores = {};
+  test.scales.forEach((scale) => {
+    if (typeof scale.formula === 'function') {
+      const computed = scale.formula(summarized) || {};
+      const normalized = typeof computed.normalized === 'number' ? Math.round(computed.normalized * 10) / 10 : 0;
+      finalScores[scale.key] = {
+        raw: typeof computed.raw === 'number' ? computed.raw : 0,
+        normalized
+      };
+    } else {
+      finalScores[scale.key] = summarized[scale.key] || { raw: 0, normalized: 0 };
+    }
+  });
+
+  return finalScores;
 }
 
 function renderComplete(test, record) {
@@ -299,8 +313,7 @@ const server = http.createServer(async (req, res) => {
     const test = getTest(slug);
     if (!test) return handleNotFound(res);
     if (req.method === 'GET') {
-      res.writeHead(200, { 'Content-Type': 'text/html' });
-      res.end(renderIntake(test));
+      res.writeHead(302, { Location: `/tests/${slug}/assessment` });
       return;
     }
     if (req.method === 'POST') {
@@ -320,11 +333,17 @@ const server = http.createServer(async (req, res) => {
     if (req.method === 'GET') {
       const record = parsedUrl.query.id ? dataStore.getRecord(parsedUrl.query.id) : null;
       res.writeHead(200, { 'Content-Type': 'text/html' });
-      res.end(renderAssessment(test, record, parsedUrl.query.id ? '' : 'Для фиксации личности используйте ссылку на заполнение данных.'));
+      res.end(renderAssessment(test, record, parsedUrl.query.id ? '' : 'Сначала заполните форму с персональными данными, чтобы перейти к вопросам.'));
       return;
     }
     if (req.method === 'POST') {
       const body = await parseFormData(req);
+      if (!body.recordId) {
+        const record = dataStore.createRecord(slug, body);
+        res.writeHead(302, { Location: `/tests/${slug}/assessment?id=${record.id}` });
+        res.end();
+        return;
+      }
       const record = dataStore.getRecord(body.recordId);
       if (!record) {
         res.writeHead(302, { Location: `/tests/${slug}/assessment` });
