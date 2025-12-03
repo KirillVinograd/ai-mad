@@ -128,13 +128,6 @@ function renderHome() {
             <strong>Никаких лишних шагов, чистый интерфейс</strong>
           </div>
         </div>
-        <div class="panel-line">
-          <div class="panel-dot"></div>
-          <div>
-            <p class="muted small">Результат</p>
-            <strong>JSON и таблицы в один клик</strong>
-          </div>
-        </div>
       </div>
     </section>
     <section class="section-title" id="tests">
