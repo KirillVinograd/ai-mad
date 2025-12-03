@@ -101,39 +101,11 @@ function renderHome() {
     )
     .join('');
 
-  const primarySlug = tests[0]?.slug;
-
-  const content = `<section class="hero">
-      <div class="hero-copy">
-        <p class="eyebrow">ai-mad · психологическое тестирование</p>
-        <h1>Профессиональная площадка для оценочных опросников</h1>
-        <p class="lead">Только необходимое: персональные данные, прохождение, готовый протокол. Доступ по приватным ссылкам, без отвлекающих блоков.</p>
-        <div class="cta-row">
-          <a class="button primary" href="${primarySlug ? `/tests/${primarySlug}/assessment` : '#'}">Начать</a>
-          <a class="button ghost" href="#tests">Выбрать методику</a>
-        </div>
-      </div>
-      <div class="hero-panel tight">
-        <div class="panel-line">
-          <div class="panel-dot"></div>
-          <div>
-            <p class="muted small">Подготовка</p>
-            <strong>Готовые формы сбора данных</strong>
-          </div>
-        </div>
-        <div class="panel-line">
-          <div class="panel-dot"></div>
-          <div>
-            <p class="muted small">Прохождение</p>
-            <strong>Никаких лишних шагов, чистый интерфейс</strong>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section class="section-title" id="tests">
+  const content = `<section class="section-title" id="tests">
       <div>
         <p class="eyebrow">методики</p>
-        <h2>Линейка тестов</h2>
+        <h1>Линейка тестов</h1>
+        <p class="muted">Запустите нужную методику и получите протокол без лишних экранов.</p>
       </div>
       <a class="pill-link" href="mailto:team@ai-mad.ru">Написать команде</a>
     </section>
