@@ -1,0 +1,132 @@
+{
+  "id": "pdo",
+  "slug": "pdo",
+  "meta": {
+    "name": "ПДО (Иванов–Личко)",
+    "short_name": "ПДО",
+    "description": "Патохарактерологический диагностический опросник для подростков и взрослых.",
+    "audience": "adolescents",
+    "duration_minutes": 30
+  },
+  "questions": [
+    { "id": "pdo_b1_q1", "text": "Легко завожу новые знакомства", "type": "multiple_choice", "page": 1, "block": "block1", "options": ["choose"], "max_select": 3 },
+    { "id": "pdo_b1_q2", "text": "Настроение меняется волнообразно", "type": "multiple_choice", "page": 1, "block": "block1", "options": ["choose"], "max_select": 3 },
+    { "id": "pdo_b1_q3", "text": "Избегаю конфликтов и соглашаюсь с большинством", "type": "multiple_choice", "page": 1, "block": "block1", "options": ["choose"], "max_select": 3 },
+    { "id": "pdo_b2_q1", "text": "Быстро устаю и нуждаюсь в отдыхе", "type": "multiple_choice", "page": 2, "block": "block2", "options": ["choose"], "max_select": 3 },
+    { "id": "pdo_b2_q2", "text": "Люблю быть инициатором событий", "type": "multiple_choice", "page": 2, "block": "block2", "options": ["choose"], "max_select": 3 }
+  ],
+  "scales": [
+    {
+      "id": "hyperthymic",
+      "name": "Гипертимный",
+      "description": "Повышенный жизненный тонус и активность.",
+      "raw_min": 0,
+      "raw_max": 6,
+      "items": [
+        { "question_id": "pdo_b1_q1", "answer_value": "selected", "score": 2 },
+        { "question_id": "pdo_b2_q2", "answer_value": "selected", "score": 2 }
+      ],
+      "norms": {
+        "method": "percent",
+        "thresholds": [
+          { "level": "акцентуация не выражена", "lte": 39 },
+          { "level": "тип акцентуации", "gt": 39, "lte": 69 },
+          { "level": "возможная психопатия", "gt": 69 }
+        ]
+      },
+      "interpretations": {
+        "акцентуация не выражена": "Гипертимные черты проявляются умеренно.",
+        "тип акцентуации": "Есть выраженная потребность в активности и лидерстве.",
+        "возможная психопатия": "Требуется экспертная оценка выраженных гипертимных проявлений."
+      }
+    },
+    {
+      "id": "cycloid",
+      "name": "Циклоидный",
+      "description": "Периодические колебания настроения.",
+      "raw_min": 0,
+      "raw_max": 6,
+      "items": [
+        { "question_id": "pdo_b1_q2", "answer_value": "selected", "score": 2 }
+      ],
+      "norms": {
+        "method": "percent",
+        "thresholds": [
+          { "level": "акцентуация не выражена", "lte": 39 },
+          { "level": "тип акцентуации", "gt": 39, "lte": 69 },
+          { "level": "возможная психопатия", "gt": 69 }
+        ]
+      },
+      "interpretations": {
+        "акцентуация не выражена": "Настроение колеблется в пределах нормы.",
+        "тип акцентуации": "Есть смена периодов подъёма и спада.",
+        "возможная психопатия": "Выраженные циклические колебания требуют консультации."
+      }
+    },
+    {
+      "id": "conformal",
+      "name": "Конформный",
+      "description": "Подчинение мнению группы и зависимости от окружения.",
+      "raw_min": 0,
+      "raw_max": 6,
+      "items": [
+        { "question_id": "pdo_b1_q3", "answer_value": "selected", "score": 2 }
+      ],
+      "norms": {
+        "method": "percent",
+        "thresholds": [
+          { "level": "акцентуация не выражена", "lte": 39 },
+          { "level": "тип акцентуации", "gt": 39, "lte": 69 },
+          { "level": "возможная психопатия", "gt": 69 }
+        ]
+      },
+      "interpretations": {
+        "акцентуация не выражена": "Подчинение группе умеренное.",
+        "тип акцентуации": "Есть выраженная зависимость от мнения окружения.",
+        "возможная психопатия": "Требуется экспертная оценка конформных проявлений."
+      }
+    },
+    {
+      "id": "asthenoneurotic",
+      "name": "Астено-невротический",
+      "description": "Утомляемость, сомнения, тревога.",
+      "raw_min": 0,
+      "raw_max": 6,
+      "items": [
+        { "question_id": "pdo_b2_q1", "answer_value": "selected", "score": 2 }
+      ],
+      "norms": {
+        "method": "percent",
+        "thresholds": [
+          { "level": "акцентуация не выражена", "lte": 39 },
+          { "level": "тип акцентуации", "gt": 39, "lte": 69 },
+          { "level": "возможная психопатия", "gt": 69 }
+        ]
+      },
+      "interpretations": {
+        "акцентуация не выражена": "Утомляемость в пределах возрастной нормы.",
+        "тип акцентуации": "Есть устойчивая склонность к истощаемости.",
+        "возможная психопатия": "Требуется внимание к состоянию и консультация специалиста."
+      }
+    }
+  ],
+  "risks": [
+    {
+      "id": "risk_delinquency",
+      "name": "Риск делинквентности",
+      "description": "Вероятность нарушения норм поведения.",
+      "source_scales": ["hyperthymic", "conformal"],
+      "thresholds": [
+        { "level": "низкий", "lte": 33 },
+        { "level": "умеренный", "gt": 33, "lte": 66 },
+        { "level": "высокий", "gt": 66 }
+      ]
+    }
+  ],
+  "derived_rules": {
+    "summary": {
+      "template": "Ведущие типы: {leaders}. Риски: {risks_status}.",
+      "placeholders": ["leaders", "risks_status"]
+    }
+  }
+}

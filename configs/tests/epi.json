@@ -1,0 +1,103 @@
+{
+  "id": "epi",
+  "slug": "epi",
+  "meta": {
+    "name": "EPI (Айзенк)",
+    "short_name": "EPI",
+    "description": "Экстраверсия, нейротизм и шкала лжи по опроснику Айзенка.",
+    "audience": "adults",
+    "duration_minutes": 12
+  },
+  "questions": [
+    { "id": "epi_q1", "text": "Мне нравится бывать в шумных компаниях", "type": "boolean", "page": 1, "block": "social" },
+    { "id": "epi_q2", "text": "Часто испытываю внутреннее напряжение", "type": "boolean", "page": 1, "block": "emotional" },
+    { "id": "epi_q3", "text": "Всегда стараюсь говорить правду", "type": "boolean", "page": 1, "block": "validity" },
+    { "id": "epi_q4", "text": "Иногда рискую ради интереса", "type": "boolean", "page": 2, "block": "social" },
+    { "id": "epi_q5", "text": "Долго переживаю из-за ошибок", "type": "boolean", "page": 2, "block": "emotional" }
+  ],
+  "scales": [
+    {
+      "id": "E",
+      "name": "Экстраверсия",
+      "description": "Ориентация на общение и активность.",
+      "raw_min": 0,
+      "raw_max": 8,
+      "items": [
+        { "question_id": "epi_q1", "answer_value": "yes", "score": 2 },
+        { "question_id": "epi_q4", "answer_value": "yes", "score": 2 }
+      ],
+      "norms": {
+        "method": "percent",
+        "thresholds": [
+          { "level": "низкий", "lte": 33 },
+          { "level": "средний", "gt": 33, "lte": 66 },
+          { "level": "высокий", "gt": 66 }
+        ]
+      },
+      "interpretations": {
+        "низкий": "Склонность к интроверсии, предпочтение уединения.",
+        "средний": "Баланс между потребностью в общении и уединением.",
+        "высокий": "Ярко выраженная экстраверсия и активность."
+      }
+    },
+    {
+      "id": "N",
+      "name": "Нейротизм",
+      "description": "Эмоциональная стабильность и уровень тревоги.",
+      "raw_min": 0,
+      "raw_max": 8,
+      "items": [
+        { "question_id": "epi_q2", "answer_value": "yes", "score": 2 },
+        { "question_id": "epi_q5", "answer_value": "yes", "score": 2 }
+      ],
+      "norms": {
+        "method": "percent",
+        "thresholds": [
+          { "level": "низкий", "lte": 33 },
+          { "level": "средний", "gt": 33, "lte": 66 },
+          { "level": "высокий", "gt": 66 }
+        ]
+      },
+      "interpretations": {
+        "низкий": "Стабилен эмоционально, редко тревожится.",
+        "средний": "Уровень тревожности в пределах нормы.",
+        "высокий": "Эмоциональная чувствительность и напряженность выше нормы."
+      }
+    },
+    {
+      "id": "L",
+      "name": "Шкала лжи",
+      "description": "Социальная желательность ответов.",
+      "raw_min": 0,
+      "raw_max": 8,
+      "items": [
+        { "question_id": "epi_q3", "answer_value": "yes", "score": 2 }
+      ],
+      "norms": {
+        "method": "percent",
+        "thresholds": [
+          { "level": "низкий", "lte": 33 },
+          { "level": "средний", "gt": 33, "lte": 66 },
+          { "level": "высокий", "gt": 66 }
+        ]
+      },
+      "interpretations": {
+        "низкий": "Ответы выглядят искренними.",
+        "средний": "Есть элементы социальной желательности.",
+        "высокий": "Результаты могут быть искажены."
+      }
+    }
+  ],
+  "derived_rules": {
+    "temperaments": [
+      { "id": "sanguine", "name": "Сангвиник", "conditions": { "E": "high", "N": "low" }, "description": "Активный, общительный, устойчивый." },
+      { "id": "choleric", "name": "Холерик", "conditions": { "E": "high", "N": "high" }, "description": "Энергичный, эмоционально яркий." },
+      { "id": "phlegmatic", "name": "Флегматик", "conditions": { "E": "low", "N": "low" }, "description": "Спокоен, уравновешен, размерен." },
+      { "id": "melancholic", "name": "Меланхолик", "conditions": { "E": "low", "N": "high" }, "description": "Сдержан, чувствителен, склонен к переживаниям." }
+    ],
+    "summary": {
+      "template": "Экстраверсия — {E}, нейротизм — {N}, предполагаемый темперамент — {temperament}.",
+      "placeholders": ["E", "N", "temperament"]
+    }
+  }
+}

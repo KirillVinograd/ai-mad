@@ -2,14 +2,14 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const url = require('url');
-const querystring = require('querystring');
-const { tests, getTest } = require('./testsConfig');
+const { listTests, getTestBySlug } = require('./configs');
 const dataStore = require('./dataStore');
+const { buildResult } = require('./lib/testEngine');
 
 const PORT = process.env.PORT || 3000;
 
 function renderLayout(title, content) {
-  const head = `<!DOCTYPE html>
+  return `<!DOCTYPE html>
   <html lang="ru">
     <head>
       <meta charset="UTF-8" />
@@ -19,6 +19,7 @@ function renderLayout(title, content) {
       <link rel="preconnect" href="https://fonts.googleapis.com">
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
       <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
+      <script src="/public/js/app.js" defer></script>
     </head>
     <body>
       <header class="top-bar">
@@ -37,7 +38,6 @@ function renderLayout(title, content) {
       <footer class="footer">ai-mad.ru · конфиденциальная платформа оценки личности</footer>
     </body>
   </html>`;
-  return head;
 }
 
 function serveStatic(filePath, res) {
@@ -47,7 +47,8 @@ function serveStatic(filePath, res) {
     '.js': 'application/javascript',
     '.png': 'image/png',
     '.svg': 'image/svg+xml',
-    '.ico': 'image/x-icon'
+    '.ico': 'image/x-icon',
+    '.json': 'application/json'
   };
   const contentType = mimeTypes[ext] || 'text/plain';
   try {
@@ -60,7 +61,7 @@ function serveStatic(filePath, res) {
   }
 }
 
-function parseFormData(req) {
+function parseJsonBody(req) {
   return new Promise((resolve, reject) => {
     let body = '';
     req.on('data', (chunk) => {
@@ -71,20 +72,25 @@ function parseFormData(req) {
       }
     });
     req.on('end', () => {
-      resolve(querystring.parse(body));
+      try {
+        resolve(body ? JSON.parse(body) : {});
+      } catch (error) {
+        reject(error);
+      }
     });
     req.on('error', reject);
   });
 }
 
 function renderHome() {
+  const tests = listTests();
   const items = tests
     .map(
       (test) => `<article class="card">
       <div class="card-header">
         <div>
-          <div class="badge">${test.name}</div>
-          <p class="muted">${test.description}</p>
+          <div class="badge">${test.meta.name}</div>
+          <p class="muted">${test.meta.description}</p>
         </div>
       </div>
       <div class="card-actions">
@@ -98,14 +104,14 @@ function renderHome() {
       <div>
         <p class="eyebrow">конфиденциальное тестирование</p>
         <h1>Психологическая диагностика<br/>для команды ai-mad</h1>
-        <p class="lead">Перед началом участник вводит персональные данные, после чего сразу переходит к вопросам.</p>
+        <p class="lead">Вопросники загружаются из конфигурации, результаты сразу готовы в едином формате JSON.</p>
       </div>
       <div class="hero-panel">
         <p>Выберите методику, чтобы начать процедуру.</p>
         <ul>
-          <li>Ввод персональных данных перед началом</li>
-          <li>Стандартизированные вопросы с балльной оценкой</li>
-          <li>Сводная таблица результатов</li>
+          <li>Сбор персональных данных перед началом</li>
+          <li>Навигация по страницам с прогресс-баром</li>
+          <li>Стандартизированный JSON протокол результатов</li>
         </ul>
       </div>
     </section>
@@ -113,190 +119,174 @@ function renderHome() {
   return renderLayout('ai-mad.ru — тестирование', content);
 }
 
-function renderAssessment(test, record, message) {
-  if (!record) {
-    const intakeForm = `<section class="panel">
-        <p class="eyebrow">${test.name}</p>
-        <h2>Персональные данные участника</h2>
-        <p class="muted">Сначала заполните анкету участника. После сохранения автоматически откроются вопросы теста.</p>
-        ${message ? `<div class="alert">${message}</div>` : ''}
-        <form method="POST" action="/tests/${test.slug}/assessment" class="form-grid">
-          <label>ФИО<input required name="fullName" placeholder="Иванов Иван"/></label>
-          <label>Email<input type="email" name="email" placeholder="example@domain.ru"/></label>
-          <label>Телефон<input name="phone" placeholder="+7 (___) ___-__-__"/></label>
-          <label>Возраст<input name="age" type="number" min="12" max="99" placeholder="28"/></label>
-          <label>Пол<select name="gender">
-            <option value="">Не выбран</option>
-            <option value="female">Женский</option>
-            <option value="male">Мужской</option>
-            <option value="other">Другое</option>
-          </select></label>
-          <label>Место учёбы / работы<input name="organization" placeholder="Компания, вуз, школа"/></label>
-          <label>Должность / роль<input name="position" placeholder="Специалист, студент, руководитель"/></label>
-          <label class="span-2">Комментарий/пожелания<textarea name="notes" rows="3" placeholder="Дополнительная информация для специалиста"></textarea></label>
-          <div class="form-actions span-2">
-            <button class="button primary" type="submit">Сохранить данные и начать тест</button>
-            <a class="button ghost" href="/">Назад</a>
-          </div>
-        </form>
-      </section>`;
-    return renderLayout(`${test.name} — анкетирование`, intakeForm);
-  }
-
-  const personSection = `<div class="person-card">
-        <div>
-          <div class="badge">${record.person.fullName || 'Участник без ФИО'}</div>
-          <p class="muted">Email: ${record.person.email || '—'} · Телефон: ${record.person.phone || '—'}</p>
-          <p class="muted">Место учёбы/работы: ${record.person.organization || '—'} · Должность: ${record.person.position || '—'}</p>
-        </div>
-        <div class="muted">Создано: ${new Date(record.createdAt).toLocaleString('ru-RU')}</div>
-      </div>`;
-  const questionsMarkup = test.questions
-    .map(
-      (question, index) => `<div class="question">
-        <div class="question-header">
-          <span class="badge neutral">Вопрос ${index + 1}</span>
-          <p>${question.text}</p>
-        </div>
-        <div class="options">
-          ${[1, 2, 3, 4, 5]
-            .map(
-              (value) => `<label class="option"><input type="radio" name="${question.id}" value="${value}" required/><span>${value} ${value === 1 ? '— совершенно не согласен' : value === 5 ? '— полностью согласен' : ''}</span></label>`
-            )
-            .join('')}
-        </div>
-      </div>`
-    )
-    .join('');
-
-  const content = `<section class="panel">
-      <p class="eyebrow">${test.name}</p>
-      <h2>Тестирование</h2>
-      <p class="muted">Ответьте на утверждения по шкале от 1 до 5. Результаты сохраняются и доступны специалисту по закрытой ссылке /results.</p>
-      ${personSection}
-      <form method="POST" action="/tests/${test.slug}/assessment" class="question-list">
-        <input type="hidden" name="recordId" value="${record.id}" />
-        ${questionsMarkup}
-        <div class="form-actions">
-          <button class="button primary" type="submit">Завершить тест</button>
-        </div>
-        ${message ? `<p class="muted">${message}</p>` : ''}
-      </form>
-    </section>`;
-  return renderLayout(`${test.name} — тест`, content);
-}
-
-function calculateScores(test, answers) {
-  const scores = {};
-  test.scales.forEach((scale) => {
-    scores[scale.key] = { raw: 0, count: 0 };
-  });
-
-  Object.entries(answers).forEach(([questionId, value]) => {
-    const question = test.questions.find((q) => q.id === questionId);
-    if (!question) return;
-    Object.entries(question.scaleWeights).forEach(([scaleKey, weight]) => {
-      if (!scores[scaleKey]) {
-        scores[scaleKey] = { raw: 0, count: 0 };
-      }
-      scores[scaleKey].raw += Number(value) * weight;
-      scores[scaleKey].count += Math.abs(weight);
-    });
-  });
-
-  const summarized = {};
-  Object.entries(scores).forEach(([key, data]) => {
-    const normalized = data.count ? Math.round((data.raw / data.count) * 10) / 10 : 0;
-    summarized[key] = { raw: data.raw, normalized };
-  });
-
-  const finalScores = {};
-  test.scales.forEach((scale) => {
-    if (typeof scale.formula === 'function') {
-      const computed = scale.formula(summarized) || {};
-      const normalized = typeof computed.normalized === 'number' ? Math.round(computed.normalized * 10) / 10 : 0;
-      finalScores[scale.key] = {
-        raw: typeof computed.raw === 'number' ? computed.raw : 0,
-        normalized
-      };
-    } else {
-      finalScores[scale.key] = summarized[scale.key] || { raw: 0, normalized: 0 };
-    }
-  });
-
-  return finalScores;
-}
-
-function renderComplete(test, record) {
-  const rows = test.scales
-    .map((scale) => {
-      const metrics = record.scores[scale.key] || { raw: 0, normalized: 0 };
-      return `<tr><td>${scale.label}</td><td>${metrics.raw}</td><td>${metrics.normalized}</td><td>${scale.detail}</td></tr>`;
-    })
-    .join('');
-  const content = `<section class="panel">
-      <p class="eyebrow">${test.name}</p>
-      <h2>Результаты тестирования</h2>
-      <div class="person-card">
-        <div>
-          <div class="badge">${record.person.fullName || 'Участник без ФИО'}</div>
-          <p class="muted">Email: ${record.person.email || '—'} · Телефон: ${record.person.phone || '—'}</p>
-          <p class="muted">Место учёбы/работы: ${record.person.organization || '—'} · Должность: ${record.person.position || '—'}</p>
-        </div>
-        <div class="muted">Дата: ${new Date(record.finishedAt).toLocaleString('ru-RU')}</div>
-      </div>
-      <div class="table-wrapper">
-        <table>
-          <thead><tr><th>Шкала</th><th>Сырой балл</th><th>Норм.</th><th>Пояснение</th></tr></thead>
-          <tbody>${rows}</tbody>
-        </table>
-      </div>
-      <p class="muted">Комментарий участника: ${record.person.notes || '—'}</p>
-      <div class="form-actions">
-        <a class="button ghost" href="/">На главную</a>
+function renderAssessmentPage(test) {
+  const content = `<section class="panel" id="test-root" data-test-slug="${test.slug}">
+      <p class="eyebrow">${test.meta.name}</p>
+      <h2>Персональные данные и прохождение</h2>
+      <p class="muted">Сначала заполните анкету участника, затем переходите к вопросам. Данные методики загружаются динамически из конфигурации.</p>
+      <div class="test-shell">
+        <div class="intake"></div>
+        <div class="assessment hidden"></div>
+        <div class="results hidden"></div>
       </div>
     </section>`;
-  return renderLayout(`${test.name} — результаты`, content);
+  return renderLayout(`${test.meta.name} — анкетирование`, content);
 }
 
-function renderResults(test, records) {
+function renderResultsPage(test, records) {
   const rows = records
     .map(
       (record) => `<tr>
-        <td>${record.person.fullName || '—'}</td>
-        <td>${record.person.email || '—'}</td>
-        <td>${record.person.phone || '—'}</td>
-        <td>${record.person.organization || '—'}</td>
-        <td>${record.person.position || '—'}</td>
-        <td>${record.person.age || '—'}</td>
+        <td>${record.person?.fullName || '—'}</td>
+        <td>${record.person?.email || '—'}</td>
+        <td>${record.person?.age || '—'}</td>
         <td>${new Date(record.finishedAt).toLocaleString('ru-RU')}</td>
-        <td><a class="button ghost" href="/tests/${test.slug}/results/${record.id}">Открыть результаты</a></td>
+        <td><a class="button ghost" href="/tests/${test.slug}/results/${record.id}">Открыть</a></td>
       </tr>`
     )
     .join('');
-
   const highlight = records.length
     ? ''
     : '<div class="alert">Пока нет завершенных протоколов. Поделитесь ссылкой на заполнение данных и прохождение теста.</div>';
 
   const content = `<section class="panel">
-      <p class="eyebrow">${test.name}</p>
+      <p class="eyebrow">${test.meta.name}</p>
       <h2>Сводная таблица результатов</h2>
       <p class="muted">Ссылка конфиденциальна: /tests/${test.slug}/results. Не передавайте её участникам.</p>
       ${highlight}
       <div class="table-wrapper">
         <table>
-          <thead><tr><th>ФИО</th><th>Email</th><th>Телефон</th><th>Место учёбы/работы</th><th>Должность</th><th>Возраст</th><th>Завершено</th><th></th></tr></thead>
+          <thead><tr><th>ФИО</th><th>Email</th><th>Возраст</th><th>Завершено</th><th></th></tr></thead>
           <tbody>${rows}</tbody>
         </table>
       </div>
     </section>`;
-  return renderLayout(`${test.name} — сводные результаты`, content);
+  return renderLayout(`${test.meta.name} — сводные результаты`, content);
+}
+
+function renderResultDetail(test, record) {
+  const scalesRows = (record.result?.scales || [])
+    .map(
+      (scale) => `<tr>
+        <td>${scale.name}</td>
+        <td>${scale.raw_score}</td>
+        <td>${scale.normalized}</td>
+        <td>${scale.level || '—'}</td>
+      </tr>`
+    )
+    .join('');
+  const content = `<section class="panel">
+      <p class="eyebrow">${test.meta.name}</p>
+      <h2>Результаты</h2>
+      <div class="person-card">
+        <div>
+          <div class="badge">${record.person?.fullName || 'Участник'}</div>
+          <p class="muted">Email: ${record.person?.email || '—'} · Телефон: ${record.person?.phone || '—'}</p>
+          <p class="muted">Возраст: ${record.person?.age || '—'} · Пол: ${record.person?.gender || '—'}</p>
+        </div>
+        <div class="muted">Дата: ${new Date(record.finishedAt).toLocaleString('ru-RU')}</div>
+      </div>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>Шкала</th><th>Сырой балл</th><th>Норм.</th><th>Уровень</th></tr></thead>
+          <tbody>${scalesRows}</tbody>
+        </table>
+      </div>
+      <p class="muted">${record.result?.summary_text || 'Резюме сформируется автоматически после прохождения.'}</p>
+      <div class="form-actions">
+        <a class="button ghost" href="/">На главную</a>
+      </div>
+    </section>`;
+  return renderLayout(`${test.meta.name} — результаты`, content);
 }
 
 function handleNotFound(res) {
   res.writeHead(404, { 'Content-Type': 'text/html' });
-  res.end(renderLayout('Страница не найдена', '<section class="panel"><h2>Страница не найдена</h2><p class="muted">Проверьте ссылку или вернитесь на главную.</p></section>'));
+  res.end(
+    renderLayout(
+      'Страница не найдена',
+      '<section class="panel"><h2>Страница не найдена</h2><p class="muted">Проверьте ссылку или вернитесь на главную.</p></section>'
+    )
+  );
+}
+
+async function handleApi(req, res, pathname) {
+  if (pathname === '/api/tests' && req.method === 'GET') {
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({ tests: listTests() }));
+    return true;
+  }
+
+  const testMatch = pathname.match(/^\/api\/tests\/([^/]+)$/);
+  if (testMatch && req.method === 'GET') {
+    const slug = testMatch[1];
+    const test = getTestBySlug(slug);
+    if (!test) {
+      res.writeHead(404, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ error: 'not_found' }));
+      return true;
+    }
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify(test));
+    return true;
+  }
+
+  const sessionCreate = pathname.match(/^\/api\/tests\/([^/]+)\/sessions$/);
+  if (sessionCreate && req.method === 'POST') {
+    try {
+      const slug = sessionCreate[1];
+      if (!getTestBySlug(slug)) throw new Error('Методика не найдена');
+      const body = await parseJsonBody(req);
+      const record = dataStore.startSession(slug, body.person || {});
+      res.writeHead(201, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ session_id: record.id, started_at: record.startedAt }));
+    } catch (error) {
+      res.writeHead(400, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ error: error.message }));
+    }
+    return true;
+  }
+
+  const sessionSubmit = pathname.match(/^\/api\/tests\/([^/]+)\/sessions\/([a-zA-Z0-9-]+)\/answers$/);
+  if (sessionSubmit && req.method === 'POST') {
+    try {
+      const slug = sessionSubmit[1];
+      const id = sessionSubmit[2];
+      const record = dataStore.getRecord(id);
+      if (!record || record.testSlug !== slug) throw new Error('Сессия не найдена');
+      const body = await parseJsonBody(req);
+      const result = buildResult(slug, id, body.answers || {}, record.startedAt);
+      const updated = dataStore.updateRecord(id, {
+        answers: result.answers,
+        result,
+        status: 'complete',
+        finishedAt: result.finished_at
+      });
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify(updated.result));
+    } catch (error) {
+      res.writeHead(400, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ error: error.message }));
+    }
+    return true;
+  }
+
+  const sessionGet = pathname.match(/^\/api\/tests\/([^/]+)\/sessions\/([a-zA-Z0-9-]+)$/);
+  if (sessionGet && req.method === 'GET') {
+    const slug = sessionGet[1];
+    const id = sessionGet[2];
+    const record = dataStore.getRecord(id);
+    if (!record || record.testSlug !== slug) {
+      res.writeHead(404, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ error: 'not_found' }));
+      return true;
+    }
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify(record));
+    return true;
+  }
+
+  return false;
 }
 
 const server = http.createServer(async (req, res) => {
@@ -304,8 +294,13 @@ const server = http.createServer(async (req, res) => {
   const pathname = parsedUrl.pathname;
 
   if (pathname.startsWith('/public/')) {
-    const filePath = path.join(__dirname, pathname);
+    const filePath = path.join(__dirname, pathname.replace('/public', 'public'));
     return serveStatic(filePath, res);
+  }
+
+  if (pathname.startsWith('/api/')) {
+    const handled = await handleApi(req, res, pathname);
+    if (handled) return;
   }
 
   if (req.method === 'GET' && pathname === '/') {
@@ -314,88 +309,24 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
-  const intakeMatch = pathname.match(/^\/tests\/([^/]+)\/intake$/);
-  if (intakeMatch) {
-    const slug = intakeMatch[1];
-    const test = getTest(slug);
-    if (!test) return handleNotFound(res);
-    if (req.method === 'GET') {
-      res.writeHead(302, { Location: `/tests/${slug}/assessment` });
-      return;
-    }
-    if (req.method === 'POST') {
-      const body = await parseFormData(req);
-      const record = dataStore.createRecord(slug, body);
-      res.writeHead(302, { Location: `/tests/${slug}/assessment?id=${record.id}` });
-      res.end();
-      return;
-    }
-  }
-
   const assessmentMatch = pathname.match(/^\/tests\/([^/]+)\/assessment$/);
-  if (assessmentMatch) {
+  if (assessmentMatch && req.method === 'GET') {
     const slug = assessmentMatch[1];
-    const test = getTest(slug);
+    const test = getTestBySlug(slug);
     if (!test) return handleNotFound(res);
-    if (req.method === 'GET') {
-      const record = parsedUrl.query.id ? dataStore.getRecord(parsedUrl.query.id) : null;
-      res.writeHead(200, { 'Content-Type': 'text/html' });
-      res.end(renderAssessment(test, record, parsedUrl.query.id ? '' : 'Сначала заполните форму с персональными данными, чтобы перейти к вопросам.'));
-      return;
-    }
-    if (req.method === 'POST') {
-      const body = await parseFormData(req);
-      if (!body.recordId) {
-        const record = dataStore.createRecord(slug, body);
-        res.writeHead(302, { Location: `/tests/${slug}/assessment?id=${record.id}` });
-        res.end();
-        return;
-      }
-      const record = dataStore.getRecord(body.recordId);
-      if (!record) {
-        res.writeHead(302, { Location: `/tests/${slug}/assessment` });
-        res.end();
-        return;
-      }
-      const answers = {};
-      test.questions.forEach((q) => {
-        if (body[q.id]) {
-          answers[q.id] = Number(body[q.id]);
-        }
-      });
-      const scores = calculateScores(test, answers);
-      const updated = dataStore.updateRecord(record.id, {
-        answers,
-        scores,
-        finishedAt: new Date().toISOString(),
-        status: 'complete'
-      });
-      res.writeHead(302, { Location: `/tests/${slug}/complete?id=${updated.id}` });
-      res.end();
-      return;
-    }
-  }
-
-  const completeMatch = pathname.match(/^\/tests\/([^/]+)\/complete$/);
-  if (completeMatch && req.method === 'GET') {
-    const slug = completeMatch[1];
-    const test = getTest(slug);
-    if (!test) return handleNotFound(res);
-    const record = parsedUrl.query.id ? dataStore.getRecord(parsedUrl.query.id) : null;
-    if (!record) return handleNotFound(res);
     res.writeHead(200, { 'Content-Type': 'text/html' });
-    res.end(renderComplete(test, record));
+    res.end(renderAssessmentPage(test));
     return;
   }
 
   const resultsMatch = pathname.match(/^\/tests\/([^/]+)\/results$/);
   if (resultsMatch && req.method === 'GET') {
     const slug = resultsMatch[1];
-    const test = getTest(slug);
+    const test = getTestBySlug(slug);
     if (!test) return handleNotFound(res);
     const records = dataStore.listRecordsByTest(slug);
     res.writeHead(200, { 'Content-Type': 'text/html' });
-    res.end(renderResults(test, records));
+    res.end(renderResultsPage(test, records));
     return;
   }
 
@@ -403,12 +334,11 @@ const server = http.createServer(async (req, res) => {
   if (detailMatch && req.method === 'GET') {
     const slug = detailMatch[1];
     const id = detailMatch[2];
-    const test = getTest(slug);
-    if (!test) return handleNotFound(res);
+    const test = getTestBySlug(slug);
     const record = dataStore.getRecord(id);
-    if (!record || record.testSlug !== slug) return handleNotFound(res);
+    if (!test || !record || record.testSlug !== slug || !record.result) return handleNotFound(res);
     res.writeHead(200, { 'Content-Type': 'text/html' });
-    res.end(renderComplete(test, record));
+    res.end(renderResultDetail(test, record));
     return;
   }
 
