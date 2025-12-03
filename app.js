@@ -87,33 +87,55 @@ function renderHome() {
   const items = tests
     .map(
       (test) => `<article class="card">
-      <div class="card-header">
-        <div>
-          <div class="badge">${test.meta.name}</div>
-          <p class="muted">${test.meta.description}</p>
+        <div class="card-header">
+          <div>
+            <div class="badge">${test.meta.name}</div>
+            <p class="muted">${test.meta.description}</p>
+          </div>
+          <span class="pill-link">JSON готов</span>
         </div>
-      </div>
-      <div class="card-actions">
-        <a class="button primary" href="/tests/${test.slug}/assessment">Пройти тест</a>
-      </div>
-    </article>`
+        <div class="card-actions">
+          <a class="button primary" href="/tests/${test.slug}/assessment">Пройти тест</a>
+          <a class="button ghost" href="/tests/${test.slug}/results">Результаты</a>
+        </div>
+      </article>`
     )
     .join('');
 
+  const primarySlug = tests[0]?.slug;
+
   const content = `<section class="hero">
-      <div>
+      <div class="hero-copy">
         <p class="eyebrow">конфиденциальное тестирование</p>
-        <h1>Психологическая диагностика<br/>для команды ai-mad</h1>
-        <p class="lead">Вопросники загружаются из конфигурации, результаты сразу готовы в едином формате JSON.</p>
+        <h1>Новый облик платформы ai-mad</h1>
+        <p class="lead">Пройдите психологические опросники в едином цифровом стиле. Мы аккуратно работаем с данными,
+        поддерживаем бизнес и образовательные команды и выдаём готовые отчёты сразу после прохождения.</p>
+        <div class="pill-row">
+          <a class="button primary" href="${primarySlug ? `/tests/${primarySlug}/assessment` : '#'}">Начать прохождение</a>
+          <a class="pill-link" href="#tests">Посмотреть методики</a>
+        </div>
+        <div class="stat-grid">
+          <div class="stat"><strong>5 минут</strong><span class="muted">на запуск теста</span></div>
+          <div class="stat"><strong>JSON</strong><span class="muted">готовый протокол</span></div>
+          <div class="stat"><strong>24/7</strong><span class="muted">доступ к результатам</span></div>
+        </div>
       </div>
       <div class="hero-panel">
-        <p>Выберите методику, чтобы начать процедуру.</p>
+        <p class="muted">Выберите методику и запустите процедуру без сложных настроек.</p>
         <ul>
-          <li>Сбор персональных данных перед началом</li>
-          <li>Навигация по страницам с прогресс-баром</li>
-          <li>Стандартизированный JSON протокол результатов</li>
+          <li>Сбор персональных данных перед стартом</li>
+          <li>Чёткая навигация по страницам и прогресс</li>
+          <li>Автоматический расчёт шкал и уровней</li>
+          <li>Приватные ссылки на таблицу результатов</li>
         </ul>
       </div>
+    </section>
+    <section class="section-title" id="tests">
+      <div>
+        <p class="eyebrow">методики</p>
+        <h2>Доступные тесты</h2>
+      </div>
+      <a class="pill-link" href="mailto:team@ai-mad.ru">Нужна помощь?</a>
     </section>
     <section class="grid">${items}</section>`;
   return renderLayout('ai-mad.ru — тестирование', content);
@@ -123,7 +145,7 @@ function renderAssessmentPage(test) {
   const content = `<section class="panel" id="test-root" data-test-slug="${test.slug}">
       <p class="eyebrow">${test.meta.name}</p>
       <h2>Персональные данные и прохождение</h2>
-      <p class="muted">Сначала заполните анкету участника, затем переходите к вопросам. Данные методики загружаются динамически из конфигурации.</p>
+      <p class="muted">Сначала заполните анкету участника, затем переходите к вопросам. Интерфейс адаптирован к новым цветам и лучше подходит для фокусированной работы.</p>
       <div class="test-shell">
         <div class="intake"></div>
         <div class="assessment hidden"></div>
@@ -157,7 +179,7 @@ function renderResultsPage(test, records) {
       <div class="table-wrapper">
         <table>
           <thead><tr><th>ФИО</th><th>Email</th><th>Возраст</th><th>Завершено</th><th></th></tr></thead>
-          <tbody>${rows}</tbody>
+      <tbody>${rows}</tbody>
         </table>
       </div>
     </section>`;
