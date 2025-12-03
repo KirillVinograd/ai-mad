@@ -21,15 +21,18 @@ function persistData(data) {
   fs.writeFileSync(DATA_PATH, JSON.stringify(data, null, 2));
 }
 
-function createRecord(testSlug, person) {
+function startSession(testSlug, person) {
   const data = loadData();
   const id = randomUUID();
   const record = {
     id,
     testSlug,
     person,
-    createdAt: new Date().toISOString(),
-    status: 'intake'
+    startedAt: new Date().toISOString(),
+    finishedAt: null,
+    status: 'in_progress',
+    answers: [],
+    result: null
   };
   data.records.push(record);
   persistData(data);
@@ -56,7 +59,7 @@ function listRecordsByTest(testSlug) {
 }
 
 module.exports = {
-  createRecord,
+  startSession,
   updateRecord,
   getRecord,
   listRecordsByTest
