@@ -12,29 +12,25 @@ node app.js
 
 Сервер будет доступен на http://localhost:3000.
 
-### Запуск через Docker
-
-Обязательно указывайте контекст сборки (`.`) в конце команды. Для сохранения результатов поверх перезапусков примонтируйте локальную папку к `/usr/src/app/data`.
-
-```bash
-docker build -t ai-mad .
-docker run -d -p 3000:3000 -v $(pwd)/data:/usr/src/app/data --name ai-mad ai-mad
-```
-
 ### Запуск через Docker Compose
 
-В репозитории добавлен `docker-compose.yml` с теми же настройками. Можно поднять контейнер одной командой:
+Файл `docker-compose.yml` оформлен в стиле многосервисных стеков: Node.js-приложение и фронтовой Nginx. Запуск по аналогии с примером из вопроса:
 
 ```bash
 docker compose up --build -d
 ```
 
-Папка `./data` автоматически монтируется в контейнер и сохраняет `data/responses.json` между перезапусками.
+Что внутри:
+
+- `app` — билд из `Dockerfile`, переменные `NODE_ENV` и `PORT`, healthcheck, том `data` → `/usr/src/app/data` для сохранения `data/responses.json` между перезапусками (при желании можно заменить на bind mount `./data:/usr/src/app/data`).
+- `nginx` — образ `nginx:alpine`, публикует порт 80:80 и использует конфигурацию из `nginx-ai-mad.conf` для проксирования на сервис `app`.
+
+Контейнеры перезапускаются с политикой `unless-stopped`. Проброса порта 3000 наружу не требуется — наружу отдаёт только Nginx.
 
 ### Привязка домена, если на сервере несколько сайтов
 
-1. Запустите этот сервис на внутреннем порту (по умолчанию 3000 через `docker compose up -d`).
-2. Добавьте отдельный серверный блок в Nginx, чтобы домен `ai-mad.ru` вёл именно сюда, а другой сайт остался на своём домене. Пример конфигурации (см. файл `nginx-ai-mad.conf`):
+1. Поднимите контейнеры (`docker compose up -d`). Внутри сети compose приложение слушает `app:3000`.
+2. Конфиг `nginx-ai-mad.conf` в комплекте сразу проксирует `ai-mad.ru` на сервис `app`:
 
    ```nginx
    server {
@@ -42,7 +38,7 @@ docker compose up --build -d
        server_name ai-mad.ru www.ai-mad.ru;
 
        location / {
-           proxy_pass http://127.0.0.1:3000;
+           proxy_pass http://app:3000;
            proxy_set_header Host $host;
            proxy_set_header X-Real-IP $remote_addr;
            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -51,7 +47,7 @@ docker compose up --build -d
    }
    ```
 
-3. Сохраните файл, например, в `/etc/nginx/sites-available/ai-mad.conf`, создайте симлинк в `sites-enabled` и выполните `nginx -t && systemctl reload nginx`.
+3. Если хотите использовать внешний Nginx на хосте, сохраните конфиг в `/etc/nginx/sites-available/ai-mad.conf`, создайте симлинк в `sites-enabled` и выполните `nginx -t && systemctl reload nginx`. Прокси-адрес в таком случае оставьте `http://127.0.0.1:3000;`.
 4. Для второго сайта используйте отдельный серверный блок с его доменом — так оба проекта будут работать на одном сервере без конфликтов портов.
 
 ## Структура
