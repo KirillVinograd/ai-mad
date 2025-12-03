@@ -83,7 +83,8 @@ body {
   transition: border 0.2s ease, color 0.2s ease, background 0.2s ease, transform 0.2s ease;
 }
 
-.top-nav a:hover {
+.top-nav a:hover,
+.pill-link:hover {
   border-color: var(--accent-strong);
   background: rgba(168, 109, 71, 0.12);
   color: var(--accent-strong);

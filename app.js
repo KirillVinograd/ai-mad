@@ -105,6 +105,7 @@ function renderHome() {
         <h1>Линейка методик</h1>
         <p class="muted">Запустите нужную методику и получите протокол без лишних экранов.</p>
       </div>
+      <a class="pill-link" href="mailto:team@ai-mad.ru">Написать команде</a>
     </section>
     <section class="grid minimal-grid">${items}</section>`;
   return renderLayout('ai-mad.ru — тестирование', content);
