@@ -1,0 +1,10 @@
+{
+  "name": "ai-mad-site",
+  "version": "1.0.0",
+  "description": "Психологическое тестирование ai-mad.ru",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {}
+}
