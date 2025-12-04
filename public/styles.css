@@ -489,3 +489,139 @@ table th {
   margin-bottom: 8px;
   gap: 10px;
 }
+
+.mlo-scale-table th,
+.mlo-scale-table td,
+.sten-table th,
+.sten-table td {
+  text-align: center;
+}
+
+.mlo-scale-table td.code,
+.sten-table td.code {
+  font-weight: 800;
+}
+
+.sten-table td.fact {
+  font-weight: 700;
+  color: var(--accent-strong);
+}
+
+.sten-bar {
+  margin: 12px 0;
+}
+
+.sten-bar__segments {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 4px;
+  margin-bottom: 6px;
+}
+
+.sten-segment {
+  height: 14px;
+  border-radius: 6px;
+  background: #e0d4c7;
+}
+
+.sten-segment.low {
+  background: linear-gradient(90deg, #d97a6d, #c56556);
+}
+
+.sten-segment.mid {
+  background: linear-gradient(90deg, #b9c7a0, #9bb08a);
+}
+
+.sten-segment.high {
+  background: linear-gradient(90deg, #7fbf7b, #5f9c68);
+}
+
+.sten-segment.off {
+  opacity: 0.3;
+}
+
+.sten-bar.compact .sten-segment {
+  height: 10px;
+}
+
+.sten-bar__label {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.range-bar {
+  height: 12px;
+  background: rgba(0, 0, 0, 0.06);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.range-bar.low { background: linear-gradient(90deg, rgba(111, 154, 111, 0.25), rgba(111, 154, 111, 0.12)); }
+.range-bar.mid { background: linear-gradient(90deg, rgba(189, 163, 92, 0.25), rgba(189, 163, 92, 0.12)); }
+.range-bar.high { background: linear-gradient(90deg, rgba(197, 101, 86, 0.25), rgba(197, 101, 86, 0.12)); }
+
+.range-bar__fill {
+  height: 100%;
+  background: linear-gradient(90deg, #9cbf8b, #c39263);
+  border-radius: 999px;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.card.shadow {
+  box-shadow: var(--shadow-soft);
+}
+
+.mmpi-block {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mmpi-row {
+  display: grid;
+  grid-template-columns: 1.2fr 2fr 60px;
+  gap: 10px;
+  align-items: center;
+}
+
+.mmpi-title {
+  font-weight: 700;
+}
+
+.mmpi-score {
+  text-align: right;
+  font-weight: 800;
+}
+
+.mini-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.legend {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 6px;
+}
+
+.result-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.summary-text {
+  background: rgba(160, 119, 80, 0.08);
+  border: 1px solid rgba(160, 119, 80, 0.2);
+  padding: 10px 12px;
+  border-radius: 14px;
+  line-height: 1.5;
+}

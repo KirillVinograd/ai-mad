@@ -155,6 +155,15 @@ function renderResultsPage(test, records) {
   return renderLayout(`${test.meta.name} — сводные результаты`, content);
 }
 
+function renderCompletePage(test, sessionId) {
+  const content = `<section class="panel" id="complete-root" data-test-id="${test.id}" data-test-slug="${test.slug}" data-session-id="${sessionId || ''}">
+      <p class="eyebrow">${test.meta.name}</p>
+      <h2>Индивидуальный протокол</h2>
+      <div class="result-host muted">Загрузка протокола...</div>
+    </section>`;
+  return renderLayout(`${test.meta.name} — результаты`, content);
+}
+
 function renderResultDetail(test, record) {
   const scalesRows = (record.result?.scales || [])
     .map(
@@ -307,6 +316,19 @@ const server = http.createServer(async (req, res) => {
     if (!test) return handleNotFound(res);
     res.writeHead(200, { 'Content-Type': 'text/html' });
     res.end(renderAssessmentPage(test));
+    return;
+  }
+
+  const completeMatch = pathname.match(/^\/tests\/([^/]+)\/complete$/);
+  if (completeMatch && req.method === 'GET') {
+    const slug = completeMatch[1];
+    const sessionId = parsedUrl.query?.id;
+    const test = getTestBySlug(slug);
+    if (!test || !sessionId) return handleNotFound(res);
+    const record = dataStore.getRecord(sessionId);
+    if (!record || record.testSlug !== slug) return handleNotFound(res);
+    res.writeHead(200, { 'Content-Type': 'text/html' });
+    res.end(renderCompletePage(test, sessionId));
     return;
   }
 
