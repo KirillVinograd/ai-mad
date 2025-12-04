@@ -96,7 +96,9 @@ function renderQuestion(question, answers) {
   return checkbox;
 }
 
-function renderAssessment(container, test, sessionId, person) {
+function renderAssessment(root, test, sessionId, person) {
+  const container = root.querySelector('.assessment');
+  if (!container) return;
   const pages = groupQuestionsByPage(test.questions);
   let currentIndex = 0;
   const answers = {};
@@ -176,7 +178,7 @@ function renderAssessment(container, test, sessionId, person) {
       alert(data.error || 'Не удалось сохранить ответы');
       return;
     }
-    renderResults(container, test, person, data);
+    renderResults(root, test, person, data);
   });
 
   container.innerHTML = '';
