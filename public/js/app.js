@@ -217,7 +217,6 @@ function renderResults(container, test, person, result) {
       <div class="scales">${bars}</div>
       ${risks ? `<div class="risk-block"><h4>Риски</h4><ul>${risks}</ul></div>` : ''}
       <div class="summary">${result.summary_text || ''}</div>
-      <pre class="json-block">${JSON.stringify(result, null, 2)}</pre>
     </div>`);
 
   const assessment = container.querySelector('.assessment');
