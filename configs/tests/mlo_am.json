@@ -1170,1598 +1170,2633 @@
     "base": "ЛАП: {lap_level}. Дезадаптация: {mal_level}. Выраженные MMPI-пики: {mmpi_peaks}."
   },
   "mlo_scoring": {
-    "age_band": "18–65 лет",
+    "age_band": "20-25 лет (муж.)",
     "scales": [
       {
+        "id": "L",
+        "name": "Шкала достоверности (L)",
+        "group": "mmpi",
+        "items": [
+          {
+            "id": "mlo_q1",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q10",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q31",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q69",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q78",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q92",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q101",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q116",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q128",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q148",
+            "answer_value": "yes"
+          }
+        ],
+        "norms": {
+          "kind": "t_score"
+        },
+        "max_score": 10
+      },
+      {
+        "id": "F",
+        "name": "Шкала надёжности (F)",
+        "group": "mmpi",
+        "items": [
+          {
+            "id": "mlo_q4",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q8",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q11",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q18",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q20",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q22",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q37",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q41",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q47",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q60",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q72",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q82",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q84",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q86",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q91",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q96",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q98",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q103",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q115",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q153",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q2",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q25",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q43",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q44",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q53",
+            "answer_value": "no"
+          }
+        ],
+        "norms": {
+          "kind": "t_score"
+        },
+        "max_score": 25
+      },
+      {
+        "id": "K",
+        "name": "Шкала коррекции (K)",
+        "group": "mmpi",
+        "items": [
+          {
+            "id": "mlo_q35",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q15",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q46",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q48",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q64",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q73",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q90",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q102",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q151",
+            "answer_value": "no"
+          }
+        ],
+        "norms": {
+          "kind": "t_score"
+        },
+        "max_score": 9
+      },
+      {
+        "id": "B1",
+        "name": "Ипохондрия (Hs)",
+        "group": "mmpi",
+        "items": [
+          {
+            "id": "mlo_q17",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q67",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q2",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q3",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q5",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q23",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q38",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q53",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q55",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q58",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q62",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q75",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q93",
+            "answer_value": "no"
+          }
+        ],
+        "norms": {
+          "kind": "t_score"
+        },
+        "k_correction": 0.5,
+        "formula": "+ 0.5K",
+        "max_score": 13
+      },
+      {
+        "id": "B2",
+        "name": "Депрессия (D)",
+        "group": "mmpi",
+        "items": [
+          {
+            "id": "mlo_q16",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q17",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q30",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q39",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q46",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q5",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q14",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q23",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q26",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q27",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q32",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q34",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q50",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q52",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q53",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q54",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q55",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q67",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q68",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q77",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q102",
+            "answer_value": "no"
+          }
+        ],
+        "norms": {
+          "kind": "t_score"
+        },
+        "max_score": 21
+      },
+      {
+        "id": "B3",
+        "name": "Истерия (Hy)",
+        "group": "mmpi",
+        "items": [
+          {
+            "id": "mlo_q11",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q17",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q20",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q21",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q28",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q65",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q67",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q2",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q3",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q23",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q33",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q38",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q42",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q45",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q48",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q53",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q58",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q61",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q62",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q64",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q75",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q88",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q90",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q95",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q97",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q99",
+            "answer_value": "no"
+          }
+        ],
+        "norms": {
+          "kind": "t_score"
+        },
+        "max_score": 26
+      },
+      {
+        "id": "B4",
+        "name": "Психопатия (Pd)",
+        "group": "mmpi",
+        "items": [
+          {
+            "id": "mlo_q6",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q8",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q11",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q12",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q14",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q41",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q42",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q56",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q72",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q81",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q82",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q91",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q114",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q13",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q35",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q45",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q48",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q55",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q79",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q90",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q97",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q100",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q102",
+            "answer_value": "no"
+          }
+        ],
+        "norms": {
+          "kind": "t_score"
+        },
+        "k_correction": 0.4,
+        "formula": "+ 0.4K",
+        "max_score": 23
+      },
+      {
+        "id": "B5",
+        "name": "Мужественность/женственность (Mf)",
+        "group": "mmpi",
+        "items": [
+          {
+            "id": "mlo_q63",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q66",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q73",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q9",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q43",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q50",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q74",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q86",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q87",
+            "answer_value": "no"
+          }
+        ],
+        "norms": {
+          "kind": "t_score"
+        },
+        "max_score": 9
+      },
+      {
+        "id": "B6",
+        "name": "Паранойяльность (Pa)",
+        "group": "mmpi",
+        "items": [
+          {
+            "id": "mlo_q4",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q7",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q8",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q10",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q18",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q39",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q43",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q46",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q48",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q98",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q104",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q125",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q150",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q152",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q33",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q42",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q84",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q137",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q145",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q155",
+            "answer_value": "no"
+          }
+        ],
+        "norms": {
+          "kind": "t_score"
+        },
+        "max_score": 20
+      },
+      {
+        "id": "B7",
+        "name": "Психастения (Pt)",
+        "group": "mmpi",
+        "items": [
+          {
+            "id": "mlo_q7",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q10",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q11",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q16",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q28",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q30",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q37",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q41",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q67",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q73",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q80",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q88",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q103",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q104",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q110",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q117",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q120",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q122",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q123",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q2",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q52",
+            "answer_value": "no"
+          }
+        ],
+        "norms": {
+          "kind": "t_score"
+        },
+        "k_correction": 1,
+        "formula": "+ 1K",
+        "max_score": 21
+      },
+      {
+        "id": "B8",
+        "name": "Шизоидность (Sc)",
+        "group": "mmpi",
+        "items": [
+          {
+            "id": "mlo_q4",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q6",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q7",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q8",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q10",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q11",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q12",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q14",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q16",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q21",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q24",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q36",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q39",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q56",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q60",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q63",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q70",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q80",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q89",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q98",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q103",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q105",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q106",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q108",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q111",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q119",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q123",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q124",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q13",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q38",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q44",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q66",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q107",
+            "answer_value": "no"
+          }
+        ],
+        "norms": {
+          "kind": "t_score"
+        },
+        "k_correction": 1,
+        "formula": "+ 1K",
+        "max_score": 33
+      },
+      {
+        "id": "B9",
+        "name": "Гипомания (Ma)",
+        "group": "mmpi",
+        "items": [
+          {
+            "id": "mlo_q6",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q7",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q27",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q36",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q42",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q49",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q56",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q59",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q76",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q77",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q80",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q89",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q90",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q93",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q95",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q40",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q43",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q64",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q96",
+            "answer_value": "no"
+          }
+        ],
+        "norms": {
+          "kind": "t_score"
+        },
+        "k_correction": 0.2,
+        "formula": "+ 0.2K",
+        "max_score": 19
+      },
+      {
+        "id": "B0",
+        "name": "Социальная интроверсия (Si)",
+        "group": "mmpi",
+        "items": [
+          {
+            "id": "mlo_q64",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q85",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q126",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q160",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q163",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q12",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q49",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q90",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q74",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q144",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q147",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q159",
+            "answer_value": "no"
+          }
+        ],
+        "norms": {
+          "kind": "t_score"
+        },
+        "max_score": 12
+      },
+      {
         "id": "A",
-        "name": "Поведенческая регуляция и НПУ",
+        "name": "Поведенческая регуляция (ПР)",
         "group": "lap_base",
         "items": [
-          { "id": "mlo_q1", "answer_value": "no" },
-          "mlo_q2",
-          "mlo_q3",
-          { "id": "mlo_q4", "answer_value": "no" },
-          "mlo_q5",
-          { "id": "mlo_q6", "answer_value": "no" },
-          { "id": "mlo_q7", "answer_value": "no" },
-          { "id": "mlo_q8", "answer_value": "no" },
-          { "id": "mlo_q9", "answer_value": "no" },
-          { "id": "mlo_q10", "answer_value": "no" },
-          { "id": "mlo_q11", "answer_value": "no" },
-          { "id": "mlo_q12", "answer_value": "no" },
-          "mlo_q13",
-          { "id": "mlo_q14", "answer_value": "no" },
-          { "id": "mlo_q15", "answer_value": "no" }
+          {
+            "id": "mlo_q4",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q6",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q7",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q8",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q11",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q12",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q15",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q16",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q17",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q18",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q20",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q21",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q28",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q29",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q30",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q37",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q39",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q40",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q41",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q47",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q57",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q60",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q63",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q65",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q67",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q68",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q70",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q71",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q73",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q80",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q82",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q83",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q84",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q86",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q89",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q94",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q95",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q96",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q98",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q102",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q103",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q108",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q109",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q110",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q111",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q112",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q113",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q115",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q117",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q118",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q119",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q120",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q122",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q123",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q124",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q127",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q129",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q131",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q135",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q136",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q137",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q139",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q143",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q146",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q149",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q153",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q154",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q155",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q156",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q157",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q158",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q161",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q162",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q2",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q3",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q5",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q23",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q25",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q32",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q38",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q44",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q45",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q49",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q52",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q53",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q54",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q55",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q58",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q62",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q66",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q75",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q87",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q105",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q127",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q132",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q134",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q140",
+            "answer_value": "no"
+          }
         ],
-        "max_score": 15,
+        "max_score": 87,
         "norms": {
           "kind": "sten",
           "table": [
             {
               "sten": 1,
-              "min": 0,
-              "max": 1,
-              "level": "ниже среднего"
+              "min": 47,
+              "max": 165,
+              "level": "выше среднего"
             },
             {
               "sten": 2,
-              "min": 2,
-              "max": 2,
-              "level": "ниже среднего"
+              "min": 38,
+              "max": 45,
+              "level": "выше среднего"
             },
             {
               "sten": 3,
-              "min": 3,
-              "max": 3,
-              "level": "ниже среднего"
+              "min": 30,
+              "max": 37,
+              "level": "выше среднего"
             },
             {
               "sten": 4,
-              "min": 4,
-              "max": 5,
+              "min": 22,
+              "max": 29,
               "level": "средний"
             },
             {
               "sten": 5,
-              "min": 6,
-              "max": 7,
+              "min": 16,
+              "max": 21,
               "level": "средний"
             },
             {
               "sten": 6,
-              "min": 8,
-              "max": 9,
+              "min": 13,
+              "max": 15,
               "level": "средний"
             },
             {
               "sten": 7,
-              "min": 10,
-              "max": 11,
+              "min": 9,
+              "max": 12,
               "level": "средний"
             },
             {
               "sten": 8,
-              "min": 12,
-              "max": 12,
-              "level": "выше среднего"
+              "min": 6,
+              "max": 8,
+              "level": "ниже среднего"
             },
             {
               "sten": 9,
-              "min": 13,
-              "max": 14,
-              "level": "выше среднего"
+              "min": 4,
+              "max": 5,
+              "level": "ниже среднего"
             },
             {
               "sten": 10,
-              "min": 15,
-              "max": 15,
-              "level": "выше среднего"
+              "min": 0,
+              "max": 3,
+              "level": "ниже среднего"
             }
           ]
-        },
-        "interpretations": {
-          "ниже среднего": "Снижен уровень саморегуляции и стрессоустойчивости, требуется поддержка.",
-          "средний": "Регуляция поведения соответствует нормативу, возможны ситуативные колебания.",
-          "выше среднего": "Сильные регуляторные возможности и устойчивая нервно-психическая сфера."
         }
       },
       {
         "id": "B",
-        "name": "Коммуникативный потенциал",
+        "name": "Коммуникативный потенциал (КП)",
         "group": "lap_base",
         "items": [
-          { "id": "mlo_q16", "answer_value": "no" },
-          { "id": "mlo_q17", "answer_value": "no" },
-          { "id": "mlo_q18", "answer_value": "no" },
-          { "id": "mlo_q19", "answer_value": "no" },
-          { "id": "mlo_q20", "answer_value": "no" },
-          { "id": "mlo_q21", "answer_value": "no" },
-          { "id": "mlo_q22", "answer_value": "no" },
-          "mlo_q23",
-          { "id": "mlo_q24", "answer_value": "no" },
-          "mlo_q25",
-          "mlo_q26",
-          { "id": "mlo_q27", "answer_value": "no" },
-          { "id": "mlo_q28", "answer_value": "no" },
-          { "id": "mlo_q29", "answer_value": "no" },
-          { "id": "mlo_q30", "answer_value": "no" }
+          {
+            "id": "mlo_q9",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q24",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q27",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q33",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q43",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q46",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q61",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q64",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q81",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q88",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q90",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q99",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q104",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q106",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q114",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q121",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q126",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q133",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q142",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q151",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q152",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q26",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q34",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q35",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q48",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q74",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q85",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q107",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q130",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q144",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q147",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q159",
+            "answer_value": "no"
+          }
         ],
-        "max_score": 15,
+        "max_score": 32,
         "norms": {
           "kind": "sten",
           "table": [
             {
               "sten": 1,
-              "min": 0,
-              "max": 1,
-              "level": "ниже среднего"
+              "min": 27,
+              "max": 165,
+              "level": "выше среднего"
             },
             {
               "sten": 2,
-              "min": 2,
-              "max": 2,
-              "level": "ниже среднего"
+              "min": 22,
+              "max": 26,
+              "level": "выше среднего"
             },
             {
               "sten": 3,
-              "min": 3,
-              "max": 3,
-              "level": "ниже среднего"
+              "min": 17,
+              "max": 21,
+              "level": "выше среднего"
             },
             {
               "sten": 4,
-              "min": 4,
-              "max": 5,
+              "min": 13,
+              "max": 16,
               "level": "средний"
             },
             {
               "sten": 5,
-              "min": 6,
-              "max": 7,
+              "min": 10,
+              "max": 12,
               "level": "средний"
             },
             {
               "sten": 6,
-              "min": 8,
+              "min": 7,
               "max": 9,
               "level": "средний"
             },
             {
               "sten": 7,
-              "min": 10,
-              "max": 11,
+              "min": 5,
+              "max": 6,
               "level": "средний"
             },
             {
               "sten": 8,
-              "min": 12,
-              "max": 12,
-              "level": "выше среднего"
+              "min": 3,
+              "max": 4,
+              "level": "ниже среднего"
             },
             {
               "sten": 9,
-              "min": 13,
-              "max": 14,
-              "level": "выше среднего"
+              "min": 1,
+              "max": 2,
+              "level": "ниже среднего"
             },
             {
               "sten": 10,
-              "min": 15,
-              "max": 15,
-              "level": "выше среднего"
+              "min": 0,
+              "max": 0,
+              "level": "ниже среднего"
             }
           ]
-        },
-        "interpretations": {
-          "ниже среднего": "Коммуникативные навыки выражены слабо, контакты даются тяжело.",
-          "средний": "Социальные навыки сформированы на нормальном уровне.",
-          "выше среднего": "Высокая контактность и эффективность во взаимодействии с людьми."
         }
       },
       {
         "id": "C",
-        "name": "Моральная нормативность",
+        "name": "Моральная нормативность (МН)",
         "group": "lap_base",
         "items": [
-          { "id": "mlo_q31", "answer_value": "no" },
-          "mlo_q32",
-          { "id": "mlo_q33", "answer_value": "no" },
-          "mlo_q34",
-          "mlo_q35",
-          { "id": "mlo_q36", "answer_value": "no" },
-          { "id": "mlo_q37", "answer_value": "no" },
-          "mlo_q38",
-          { "id": "mlo_q39", "answer_value": "no" },
-          { "id": "mlo_q40", "answer_value": "no" },
-          { "id": "mlo_q41", "answer_value": "no" },
-          { "id": "mlo_q42", "answer_value": "no" },
-          "mlo_q43",
-          "mlo_q44",
-          "mlo_q45"
+          {
+            "id": "mlo_q14",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q22",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q36",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q42",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q50",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q56",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q59",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q72",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q77",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q79",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q91",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q93",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q125",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q141",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q145",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q150",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q164",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q165",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q13",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q76",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q97",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q100",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q160",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q163",
+            "answer_value": "no"
+          }
         ],
-        "max_score": 15,
+        "max_score": 24,
         "norms": {
           "kind": "sten",
           "table": [
             {
               "sten": 1,
-              "min": 0,
-              "max": 1,
-              "level": "ниже среднего"
+              "min": 19,
+              "max": 165,
+              "level": "выше среднего"
             },
             {
               "sten": 2,
-              "min": 2,
-              "max": 2,
-              "level": "ниже среднего"
+              "min": 15,
+              "max": 18,
+              "level": "выше среднего"
             },
             {
               "sten": 3,
-              "min": 3,
-              "max": 3,
-              "level": "ниже среднего"
+              "min": 12,
+              "max": 14,
+              "level": "выше среднего"
             },
             {
               "sten": 4,
-              "min": 4,
-              "max": 5,
-              "level": "средний"
-            },
-            {
-              "sten": 5,
-              "min": 6,
-              "max": 7,
-              "level": "средний"
-            },
-            {
-              "sten": 6,
-              "min": 8,
-              "max": 9,
-              "level": "средний"
-            },
-            {
-              "sten": 7,
               "min": 10,
               "max": 11,
               "level": "средний"
             },
             {
+              "sten": 5,
+              "min": 7,
+              "max": 9,
+              "level": "средний"
+            },
+            {
+              "sten": 6,
+              "min": 5,
+              "max": 6,
+              "level": "средний"
+            },
+            {
+              "sten": 7,
+              "min": 3,
+              "max": 4,
+              "level": "средний"
+            },
+            {
               "sten": 8,
-              "min": 12,
-              "max": 12,
-              "level": "выше среднего"
+              "min": 2,
+              "max": 2,
+              "level": "ниже среднего"
             },
             {
               "sten": 9,
-              "min": 13,
-              "max": 14,
-              "level": "выше среднего"
+              "min": 1,
+              "max": 1,
+              "level": "ниже среднего"
             },
             {
               "sten": 10,
-              "min": 15,
-              "max": 15,
-              "level": "выше среднего"
+              "min": 0,
+              "max": 0,
+              "level": "ниже среднего"
             }
           ]
-        },
-        "interpretations": {
-          "ниже среднего": "Гибкость к нормам и правилам, возможны нарушения договорённостей.",
-          "средний": "Соблюдает нормы и договорённости в типичных ситуациях.",
-          "выше среднего": "Высокая добросовестность и приверженность правилам."
+        }
+      },
+      {
+        "id": "L2",
+        "name": "Шкала достоверности (3 ур.)",
+        "group": "lap_base",
+        "items": [
+          {
+            "id": "mlo_q1",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q10",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q11",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q19",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q31",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q51",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q69",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q78",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q92",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q101",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q116",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q128",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q138",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q148",
+            "answer_value": "no"
+          }
+        ],
+        "max_score": 14,
+        "norms": {
+          "kind": "sten"
         }
       },
       {
         "id": "G",
-        "name": "Астенические реакции",
-        "group": "maladaptation",
+        "name": "Астенические реакции (АС)",
+        "group": "dan",
         "items": [
-          "mlo_q46",
-          "mlo_q47",
-          "mlo_q48",
-          "mlo_q49",
-          "mlo_q50",
-          "mlo_q51",
-          "mlo_q52",
-          "mlo_q53",
-          "mlo_q54",
-          "mlo_q55",
-          "mlo_q56",
-          "mlo_q57",
-          "mlo_q58",
-          "mlo_q59",
-          "mlo_q60"
+          {
+            "id": "mlo_q6",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q7",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q12",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q13",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q14",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q18",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q27",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q31",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q32",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q33",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q34",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q37",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q41",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q43",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q46",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q48",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q49",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q51",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q52",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q53",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q55",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q57",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q58",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q59",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q60",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q61",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q63",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q64",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q71",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q72",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q73",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q74",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q1",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q2",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q9",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q11",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q21",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q25",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q26",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q30",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q38",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q42",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q67",
+            "answer_value": "no"
+          }
         ],
-        "max_score": 15,
+        "max_score": 42,
         "norms": {
           "kind": "sten",
           "table": [
             {
               "sten": 1,
-              "min": 0,
-              "max": 1,
-              "level": "ниже среднего"
+              "min": 36,
+              "max": 165,
+              "level": "выше среднего"
             },
             {
               "sten": 2,
-              "min": 2,
-              "max": 2,
-              "level": "ниже среднего"
+              "min": 30,
+              "max": 35,
+              "level": "выше среднего"
             },
             {
               "sten": 3,
-              "min": 3,
-              "max": 3,
-              "level": "ниже среднего"
+              "min": 22,
+              "max": 29,
+              "level": "выше среднего"
             },
             {
               "sten": 4,
-              "min": 4,
-              "max": 5,
+              "min": 16,
+              "max": 21,
               "level": "средний"
             },
             {
               "sten": 5,
-              "min": 6,
-              "max": 7,
+              "min": 10,
+              "max": 15,
               "level": "средний"
             },
             {
               "sten": 6,
-              "min": 8,
+              "min": 7,
               "max": 9,
               "level": "средний"
             },
             {
               "sten": 7,
-              "min": 10,
-              "max": 11,
+              "min": 5,
+              "max": 6,
               "level": "средний"
             },
             {
               "sten": 8,
-              "min": 12,
-              "max": 12,
-              "level": "выше среднего"
+              "min": 3,
+              "max": 4,
+              "level": "ниже среднего"
             },
             {
               "sten": 9,
-              "min": 13,
-              "max": 14,
-              "level": "выше среднего"
+              "min": 2,
+              "max": 2,
+              "level": "ниже среднего"
             },
             {
               "sten": 10,
-              "min": 15,
-              "max": 15,
-              "level": "выше среднего"
+              "min": 0,
+              "max": 1,
+              "level": "ниже среднего"
             }
           ]
-        },
-        "interpretations": {
-          "ниже среднего": "Астенические проявления практически отсутствуют.",
-          "средний": "Наблюдаются умеренные признаки утомляемости и астении.",
-          "выше среднего": "Выраженные астенические реакции, требуется восстановление ресурсов."
         }
       },
       {
         "id": "H",
-        "name": "Психотические реакции",
-        "group": "maladaptation",
+        "name": "Психотические реакции (ПС)",
+        "group": "dan",
         "items": [
-          "mlo_q61",
-          "mlo_q62",
-          "mlo_q63",
-          "mlo_q64",
-          "mlo_q65",
-          "mlo_q66",
-          "mlo_q67",
-          "mlo_q68",
-          "mlo_q69",
-          "mlo_q70",
-          "mlo_q71",
-          "mlo_q72",
-          "mlo_q73",
-          "mlo_q74",
-          "mlo_q75"
+          {
+            "id": "mlo_q3",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q4",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q5",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q8",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q10",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q15",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q17",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q19",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q20",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q22",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q23",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q24",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q28",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q29",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q35",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q36",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q39",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q40",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q44",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q45",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q47",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q50",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q54",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q56",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q65",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q66",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q68",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q69",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q70",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q76",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q77",
+            "answer_value": "yes"
+          },
+          {
+            "id": "mlo_q16",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q62",
+            "answer_value": "no"
+          },
+          {
+            "id": "mlo_q75",
+            "answer_value": "no"
+          }
         ],
-        "max_score": 15,
+        "max_score": 34,
         "norms": {
           "kind": "sten",
           "table": [
             {
               "sten": 1,
-              "min": 0,
-              "max": 1,
-              "level": "ниже среднего"
-            },
-            {
-              "sten": 2,
-              "min": 2,
-              "max": 2,
-              "level": "ниже среднего"
-            },
-            {
-              "sten": 3,
-              "min": 3,
-              "max": 3,
-              "level": "ниже среднего"
-            },
-            {
-              "sten": 4,
-              "min": 4,
-              "max": 5,
-              "level": "средний"
-            },
-            {
-              "sten": 5,
-              "min": 6,
-              "max": 7,
-              "level": "средний"
-            },
-            {
-              "sten": 6,
-              "min": 8,
-              "max": 9,
-              "level": "средний"
-            },
-            {
-              "sten": 7,
-              "min": 10,
-              "max": 11,
-              "level": "средний"
-            },
-            {
-              "sten": 8,
-              "min": 12,
-              "max": 12,
+              "min": 27,
+              "max": 165,
               "level": "выше среднего"
             },
             {
-              "sten": 9,
+              "sten": 2,
+              "min": 22,
+              "max": 26,
+              "level": "выше среднего"
+            },
+            {
+              "sten": 3,
+              "min": 16,
+              "max": 21,
+              "level": "выше среднего"
+            },
+            {
+              "sten": 4,
               "min": 13,
-              "max": 14,
-              "level": "выше среднего"
-            },
-            {
-              "sten": 10,
-              "min": 15,
               "max": 15,
-              "level": "выше среднего"
-            }
-          ]
-        },
-        "interpretations": {
-          "ниже среднего": "Психотические реакции не выражены.",
-          "средний": "Есть отдельные нестабильные переживания.",
-          "выше среднего": "Отмечается высокая выраженность дезорганизующих реакций."
-        }
-      },
-      {
-        "id": "L",
-        "name": "Шкала искренности",
-        "group": "control",
-        "items": [
-          "mlo_q76",
-          "mlo_q77",
-          "mlo_q78",
-          "mlo_q79",
-          "mlo_q80",
-          "mlo_q81",
-          "mlo_q82",
-          "mlo_q83",
-          "mlo_q84",
-          "mlo_q85"
-        ],
-        "max_score": 10,
-        "norms": {
-          "kind": "sten",
-          "table": [
-            {
-              "sten": 1,
-              "min": 0,
-              "max": 1,
-              "level": "ниже среднего"
-            },
-            {
-              "sten": 2,
-              "min": 2,
-              "max": 2,
-              "level": "ниже среднего"
-            },
-            {
-              "sten": 3,
-              "min": 3,
-              "max": 3,
-              "level": "ниже среднего"
-            },
-            {
-              "sten": 4,
-              "min": 4,
-              "max": 4,
               "level": "средний"
             },
             {
               "sten": 5,
-              "min": 5,
-              "max": 5,
+              "min": 8,
+              "max": 12,
               "level": "средний"
             },
             {
               "sten": 6,
               "min": 6,
-              "max": 6,
-              "level": "средний"
-            },
-            {
-              "sten": 7,
-              "min": 7,
               "max": 7,
               "level": "средний"
             },
             {
-              "sten": 8,
-              "min": 8,
-              "max": 8,
-              "level": "выше среднего"
-            },
-            {
-              "sten": 9,
-              "min": 9,
-              "max": 9,
-              "level": "выше среднего"
-            },
-            {
-              "sten": 10,
-              "min": 10,
-              "max": 10,
-              "level": "выше среднего"
-            }
-          ]
-        },
-        "interpretations": {
-          "ниже среднего": "Ответы искренние, без явной социальной желательности.",
-          "средний": "Есть незначительные признаки корректировки образа.",
-          "выше среднего": "Высокая социальная желательность, часть ответов может быть приукрашена."
-        }
-      },
-      {
-        "id": "F",
-        "name": "Шкала надёжности",
-        "group": "control",
-        "items": [
-          "mlo_q86",
-          "mlo_q87",
-          "mlo_q88",
-          "mlo_q89",
-          "mlo_q90",
-          "mlo_q91",
-          "mlo_q92",
-          "mlo_q93",
-          "mlo_q94",
-          "mlo_q95"
-        ],
-        "max_score": 10,
-        "norms": {
-          "kind": "sten",
-          "table": [
-            {
-              "sten": 1,
-              "min": 0,
-              "max": 1,
-              "level": "ниже среднего"
-            },
-            {
-              "sten": 2,
-              "min": 2,
-              "max": 2,
-              "level": "ниже среднего"
-            },
-            {
-              "sten": 3,
-              "min": 3,
-              "max": 3,
-              "level": "ниже среднего"
-            },
-            {
-              "sten": 4,
-              "min": 4,
-              "max": 4,
-              "level": "средний"
-            },
-            {
-              "sten": 5,
-              "min": 5,
-              "max": 5,
-              "level": "средний"
-            },
-            {
-              "sten": 6,
-              "min": 6,
-              "max": 6,
-              "level": "средний"
-            },
-            {
               "sten": 7,
-              "min": 7,
-              "max": 7,
+              "min": 4,
+              "max": 5,
               "level": "средний"
             },
             {
               "sten": 8,
-              "min": 8,
-              "max": 8,
-              "level": "выше среднего"
+              "min": 2,
+              "max": 3,
+              "level": "ниже среднего"
             },
             {
               "sten": 9,
-              "min": 9,
-              "max": 9,
-              "level": "выше среднего"
+              "min": 1,
+              "max": 1,
+              "level": "ниже среднего"
             },
             {
               "sten": 10,
-              "min": 10,
-              "max": 10,
-              "level": "выше среднего"
-            }
-          ]
-        },
-        "interpretations": {
-          "ниже среднего": "Профиль ответов устойчивый и аккуратный.",
-          "средний": "Единичные расхождения, в целом протокол пригоден.",
-          "выше среднего": "Есть нестандартные ответы, внимательнее проверяйте профиль."
-        }
-      },
-      {
-        "id": "K",
-        "name": "Шкала коррекции",
-        "group": "control",
-        "items": [
-          "mlo_q96",
-          "mlo_q97",
-          "mlo_q98",
-          "mlo_q99",
-          "mlo_q100",
-          "mlo_q101",
-          "mlo_q102",
-          "mlo_q103",
-          "mlo_q104",
-          "mlo_q105"
-        ],
-        "max_score": 10,
-        "norms": {
-          "kind": "sten",
-          "table": [
-            {
-              "sten": 1,
               "min": 0,
-              "max": 1,
+              "max": 0,
               "level": "ниже среднего"
-            },
-            {
-              "sten": 2,
-              "min": 2,
-              "max": 2,
-              "level": "ниже среднего"
-            },
-            {
-              "sten": 3,
-              "min": 3,
-              "max": 3,
-              "level": "ниже среднего"
-            },
-            {
-              "sten": 4,
-              "min": 4,
-              "max": 4,
-              "level": "средний"
-            },
-            {
-              "sten": 5,
-              "min": 5,
-              "max": 5,
-              "level": "средний"
-            },
-            {
-              "sten": 6,
-              "min": 6,
-              "max": 6,
-              "level": "средний"
-            },
-            {
-              "sten": 7,
-              "min": 7,
-              "max": 7,
-              "level": "средний"
-            },
-            {
-              "sten": 8,
-              "min": 8,
-              "max": 8,
-              "level": "выше среднего"
-            },
-            {
-              "sten": 9,
-              "min": 9,
-              "max": 9,
-              "level": "выше среднего"
-            },
-            {
-              "sten": 10,
-              "min": 10,
-              "max": 10,
-              "level": "выше среднего"
             }
           ]
-        },
-        "interpretations": {
-          "ниже среднего": "Минимальная коррекция образа.",
-          "средний": "Умеренная коррекция, общая достоверность сохранена.",
-          "выше среднего": "Сильное стремление скорректировать ответы, используйте осторожно."
-        }
-      },
-      {
-        "id": "B1",
-        "name": "Шкала 1: Ипохондрия (Hs)",
-        "group": "mmpi",
-        "items": [
-          "mlo_q106",
-          "mlo_q107",
-          "mlo_q108",
-          "mlo_q109",
-          "mlo_q110",
-          "mlo_q111"
-        ],
-        "max_score": 6,
-        "norms": {
-          "kind": "t_score",
-          "table": [
-            {
-              "value": 35,
-              "min": 0,
-              "max": 0,
-              "level": "низкий"
-            },
-            {
-              "value": 40,
-              "min": 1,
-              "max": 1,
-              "level": "низкий"
-            },
-            {
-              "value": 45,
-              "min": 2,
-              "max": 2,
-              "level": "средний"
-            },
-            {
-              "value": 50,
-              "min": 3,
-              "max": 3,
-              "level": "средний"
-            },
-            {
-              "value": 60,
-              "min": 4,
-              "max": 4,
-              "level": "повышенный"
-            },
-            {
-              "value": 70,
-              "min": 5,
-              "max": 5,
-              "level": "высокий"
-            },
-            {
-              "value": 80,
-              "min": 6,
-              "max": 6,
-              "level": "высокий"
-            }
-          ]
-        },
-        "k_correction": 0.5,
-        "formula": "+ 0.5K",
-        "interpretations": {
-          "низкий": "Показатель находится в низком диапазоне, жалобы по шкале не выражены.",
-          "средний": "Средний уровень выраженности, клинически значимых проявлений нет.",
-          "повышенный": "Повышенные проявления, обратите внимание на содержание шкалы.",
-          "высокий": "Высокая выраженность признаков по шкале."
-        }
-      },
-      {
-        "id": "B2",
-        "name": "Шкала 2: Депрессия (D)",
-        "group": "mmpi",
-        "items": [
-          "mlo_q112",
-          "mlo_q113",
-          "mlo_q114",
-          "mlo_q115",
-          "mlo_q116",
-          "mlo_q117"
-        ],
-        "max_score": 6,
-        "norms": {
-          "kind": "t_score",
-          "table": [
-            {
-              "value": 35,
-              "min": 0,
-              "max": 0,
-              "level": "низкий"
-            },
-            {
-              "value": 40,
-              "min": 1,
-              "max": 1,
-              "level": "низкий"
-            },
-            {
-              "value": 45,
-              "min": 2,
-              "max": 2,
-              "level": "средний"
-            },
-            {
-              "value": 50,
-              "min": 3,
-              "max": 3,
-              "level": "средний"
-            },
-            {
-              "value": 60,
-              "min": 4,
-              "max": 4,
-              "level": "повышенный"
-            },
-            {
-              "value": 70,
-              "min": 5,
-              "max": 5,
-              "level": "высокий"
-            },
-            {
-              "value": 80,
-              "min": 6,
-              "max": 6,
-              "level": "высокий"
-            }
-          ]
-        },
-        "k_correction": 0,
-        "formula": "",
-        "interpretations": {
-          "низкий": "Показатель находится в низком диапазоне, жалобы по шкале не выражены.",
-          "средний": "Средний уровень выраженности, клинически значимых проявлений нет.",
-          "повышенный": "Повышенные проявления, обратите внимание на содержание шкалы.",
-          "высокий": "Высокая выраженность признаков по шкале."
-        }
-      },
-      {
-        "id": "B3",
-        "name": "Шкала 3: Истерия (Hy)",
-        "group": "mmpi",
-        "items": [
-          "mlo_q118",
-          "mlo_q119",
-          "mlo_q120",
-          "mlo_q121",
-          "mlo_q122",
-          "mlo_q123"
-        ],
-        "max_score": 6,
-        "norms": {
-          "kind": "t_score",
-          "table": [
-            {
-              "value": 35,
-              "min": 0,
-              "max": 0,
-              "level": "низкий"
-            },
-            {
-              "value": 40,
-              "min": 1,
-              "max": 1,
-              "level": "низкий"
-            },
-            {
-              "value": 45,
-              "min": 2,
-              "max": 2,
-              "level": "средний"
-            },
-            {
-              "value": 50,
-              "min": 3,
-              "max": 3,
-              "level": "средний"
-            },
-            {
-              "value": 60,
-              "min": 4,
-              "max": 4,
-              "level": "повышенный"
-            },
-            {
-              "value": 70,
-              "min": 5,
-              "max": 5,
-              "level": "высокий"
-            },
-            {
-              "value": 80,
-              "min": 6,
-              "max": 6,
-              "level": "высокий"
-            }
-          ]
-        },
-        "k_correction": 0,
-        "formula": "",
-        "interpretations": {
-          "низкий": "Показатель находится в низком диапазоне, жалобы по шкале не выражены.",
-          "средний": "Средний уровень выраженности, клинически значимых проявлений нет.",
-          "повышенный": "Повышенные проявления, обратите внимание на содержание шкалы.",
-          "высокий": "Высокая выраженность признаков по шкале."
-        }
-      },
-      {
-        "id": "B4",
-        "name": "Шкала 4: Психопатия (Pd)",
-        "group": "mmpi",
-        "items": [
-          "mlo_q124",
-          "mlo_q125",
-          "mlo_q126",
-          "mlo_q127",
-          "mlo_q128",
-          "mlo_q129"
-        ],
-        "max_score": 6,
-        "norms": {
-          "kind": "t_score",
-          "table": [
-            {
-              "value": 35,
-              "min": 0,
-              "max": 0,
-              "level": "низкий"
-            },
-            {
-              "value": 40,
-              "min": 1,
-              "max": 1,
-              "level": "низкий"
-            },
-            {
-              "value": 45,
-              "min": 2,
-              "max": 2,
-              "level": "средний"
-            },
-            {
-              "value": 50,
-              "min": 3,
-              "max": 3,
-              "level": "средний"
-            },
-            {
-              "value": 60,
-              "min": 4,
-              "max": 4,
-              "level": "повышенный"
-            },
-            {
-              "value": 70,
-              "min": 5,
-              "max": 5,
-              "level": "высокий"
-            },
-            {
-              "value": 80,
-              "min": 6,
-              "max": 6,
-              "level": "высокий"
-            }
-          ]
-        },
-        "k_correction": 0.4,
-        "formula": "+ 0.4K",
-        "interpretations": {
-          "низкий": "Показатель находится в низком диапазоне, жалобы по шкале не выражены.",
-          "средний": "Средний уровень выраженности, клинически значимых проявлений нет.",
-          "повышенный": "Повышенные проявления, обратите внимание на содержание шкалы.",
-          "высокий": "Высокая выраженность признаков по шкале."
-        }
-      },
-      {
-        "id": "B5",
-        "name": "Шкала 5: Мужественность/женственность (Mf)",
-        "group": "mmpi",
-        "items": [
-          "mlo_q130",
-          "mlo_q131",
-          "mlo_q132",
-          "mlo_q133",
-          "mlo_q134",
-          "mlo_q135"
-        ],
-        "max_score": 6,
-        "norms": {
-          "kind": "t_score",
-          "table": [
-            {
-              "value": 35,
-              "min": 0,
-              "max": 0,
-              "level": "низкий"
-            },
-            {
-              "value": 40,
-              "min": 1,
-              "max": 1,
-              "level": "низкий"
-            },
-            {
-              "value": 45,
-              "min": 2,
-              "max": 2,
-              "level": "средний"
-            },
-            {
-              "value": 50,
-              "min": 3,
-              "max": 3,
-              "level": "средний"
-            },
-            {
-              "value": 60,
-              "min": 4,
-              "max": 4,
-              "level": "повышенный"
-            },
-            {
-              "value": 70,
-              "min": 5,
-              "max": 5,
-              "level": "высокий"
-            },
-            {
-              "value": 80,
-              "min": 6,
-              "max": 6,
-              "level": "высокий"
-            }
-          ]
-        },
-        "k_correction": 0,
-        "formula": "",
-        "interpretations": {
-          "низкий": "Показатель находится в низком диапазоне, жалобы по шкале не выражены.",
-          "средний": "Средний уровень выраженности, клинически значимых проявлений нет.",
-          "повышенный": "Повышенные проявления, обратите внимание на содержание шкалы.",
-          "высокий": "Высокая выраженность признаков по шкале."
-        }
-      },
-      {
-        "id": "B6",
-        "name": "Шкала 6: Паранойяльность (Pa)",
-        "group": "mmpi",
-        "items": [
-          "mlo_q136",
-          "mlo_q137",
-          "mlo_q138",
-          "mlo_q139",
-          "mlo_q140",
-          "mlo_q141"
-        ],
-        "max_score": 6,
-        "norms": {
-          "kind": "t_score",
-          "table": [
-            {
-              "value": 35,
-              "min": 0,
-              "max": 0,
-              "level": "низкий"
-            },
-            {
-              "value": 40,
-              "min": 1,
-              "max": 1,
-              "level": "низкий"
-            },
-            {
-              "value": 45,
-              "min": 2,
-              "max": 2,
-              "level": "средний"
-            },
-            {
-              "value": 50,
-              "min": 3,
-              "max": 3,
-              "level": "средний"
-            },
-            {
-              "value": 60,
-              "min": 4,
-              "max": 4,
-              "level": "повышенный"
-            },
-            {
-              "value": 70,
-              "min": 5,
-              "max": 5,
-              "level": "высокий"
-            },
-            {
-              "value": 80,
-              "min": 6,
-              "max": 6,
-              "level": "высокий"
-            }
-          ]
-        },
-        "k_correction": 0,
-        "formula": "",
-        "interpretations": {
-          "низкий": "Показатель находится в низком диапазоне, жалобы по шкале не выражены.",
-          "средний": "Средний уровень выраженности, клинически значимых проявлений нет.",
-          "повышенный": "Повышенные проявления, обратите внимание на содержание шкалы.",
-          "высокий": "Высокая выраженность признаков по шкале."
-        }
-      },
-      {
-        "id": "B7",
-        "name": "Шкала 7: Психастения (Pt)",
-        "group": "mmpi",
-        "items": [
-          "mlo_q142",
-          "mlo_q143",
-          "mlo_q144",
-          "mlo_q145",
-          "mlo_q146",
-          "mlo_q147"
-        ],
-        "max_score": 6,
-        "norms": {
-          "kind": "t_score",
-          "table": [
-            {
-              "value": 35,
-              "min": 0,
-              "max": 0,
-              "level": "низкий"
-            },
-            {
-              "value": 40,
-              "min": 1,
-              "max": 1,
-              "level": "низкий"
-            },
-            {
-              "value": 45,
-              "min": 2,
-              "max": 2,
-              "level": "средний"
-            },
-            {
-              "value": 50,
-              "min": 3,
-              "max": 3,
-              "level": "средний"
-            },
-            {
-              "value": 60,
-              "min": 4,
-              "max": 4,
-              "level": "повышенный"
-            },
-            {
-              "value": 70,
-              "min": 5,
-              "max": 5,
-              "level": "высокий"
-            },
-            {
-              "value": 80,
-              "min": 6,
-              "max": 6,
-              "level": "высокий"
-            }
-          ]
-        },
-        "k_correction": 1,
-        "formula": "+ 1K",
-        "interpretations": {
-          "низкий": "Показатель находится в низком диапазоне, жалобы по шкале не выражены.",
-          "средний": "Средний уровень выраженности, клинически значимых проявлений нет.",
-          "повышенный": "Повышенные проявления, обратите внимание на содержание шкалы.",
-          "высокий": "Высокая выраженность признаков по шкале."
-        }
-      },
-      {
-        "id": "B8",
-        "name": "Шкала 8: Шизоидность (Sc)",
-        "group": "mmpi",
-        "items": [
-          "mlo_q148",
-          "mlo_q149",
-          "mlo_q150",
-          "mlo_q151",
-          "mlo_q152",
-          "mlo_q153"
-        ],
-        "max_score": 6,
-        "norms": {
-          "kind": "t_score",
-          "table": [
-            {
-              "value": 35,
-              "min": 0,
-              "max": 0,
-              "level": "низкий"
-            },
-            {
-              "value": 40,
-              "min": 1,
-              "max": 1,
-              "level": "низкий"
-            },
-            {
-              "value": 45,
-              "min": 2,
-              "max": 2,
-              "level": "средний"
-            },
-            {
-              "value": 50,
-              "min": 3,
-              "max": 3,
-              "level": "средний"
-            },
-            {
-              "value": 60,
-              "min": 4,
-              "max": 4,
-              "level": "повышенный"
-            },
-            {
-              "value": 70,
-              "min": 5,
-              "max": 5,
-              "level": "высокий"
-            },
-            {
-              "value": 80,
-              "min": 6,
-              "max": 6,
-              "level": "высокий"
-            }
-          ]
-        },
-        "k_correction": 1,
-        "formula": "+ 1K",
-        "interpretations": {
-          "низкий": "Показатель находится в низком диапазоне, жалобы по шкале не выражены.",
-          "средний": "Средний уровень выраженности, клинически значимых проявлений нет.",
-          "повышенный": "Повышенные проявления, обратите внимание на содержание шкалы.",
-          "высокий": "Высокая выраженность признаков по шкале."
-        }
-      },
-      {
-        "id": "B9",
-        "name": "Шкала 9: Гипомания (Ma)",
-        "group": "mmpi",
-        "items": [
-          "mlo_q154",
-          "mlo_q155",
-          "mlo_q156",
-          "mlo_q157",
-          "mlo_q158",
-          "mlo_q159"
-        ],
-        "max_score": 6,
-        "norms": {
-          "kind": "t_score",
-          "table": [
-            {
-              "value": 35,
-              "min": 0,
-              "max": 0,
-              "level": "низкий"
-            },
-            {
-              "value": 40,
-              "min": 1,
-              "max": 1,
-              "level": "низкий"
-            },
-            {
-              "value": 45,
-              "min": 2,
-              "max": 2,
-              "level": "средний"
-            },
-            {
-              "value": 50,
-              "min": 3,
-              "max": 3,
-              "level": "средний"
-            },
-            {
-              "value": 60,
-              "min": 4,
-              "max": 4,
-              "level": "повышенный"
-            },
-            {
-              "value": 70,
-              "min": 5,
-              "max": 5,
-              "level": "высокий"
-            },
-            {
-              "value": 80,
-              "min": 6,
-              "max": 6,
-              "level": "высокий"
-            }
-          ]
-        },
-        "k_correction": 0.2,
-        "formula": "+ 0.2K",
-        "interpretations": {
-          "низкий": "Показатель находится в низком диапазоне, жалобы по шкале не выражены.",
-          "средний": "Средний уровень выраженности, клинически значимых проявлений нет.",
-          "повышенный": "Повышенные проявления, обратите внимание на содержание шкалы.",
-          "высокий": "Высокая выраженность признаков по шкале."
-        }
-      },
-      {
-        "id": "B0",
-        "name": "Шкала 0: Социальная интроверсия (Si)",
-        "group": "mmpi",
-        "items": [
-          "mlo_q160",
-          "mlo_q161",
-          "mlo_q162",
-          "mlo_q163",
-          "mlo_q164",
-          "mlo_q165"
-        ],
-        "max_score": 6,
-        "norms": {
-          "kind": "t_score",
-          "table": [
-            {
-              "value": 35,
-              "min": 0,
-              "max": 0,
-              "level": "низкий"
-            },
-            {
-              "value": 40,
-              "min": 1,
-              "max": 1,
-              "level": "низкий"
-            },
-            {
-              "value": 45,
-              "min": 2,
-              "max": 2,
-              "level": "средний"
-            },
-            {
-              "value": 50,
-              "min": 3,
-              "max": 3,
-              "level": "средний"
-            },
-            {
-              "value": 60,
-              "min": 4,
-              "max": 4,
-              "level": "повышенный"
-            },
-            {
-              "value": 70,
-              "min": 5,
-              "max": 5,
-              "level": "высокий"
-            },
-            {
-              "value": 80,
-              "min": 6,
-              "max": 6,
-              "level": "высокий"
-            }
-          ]
-        },
-        "k_correction": 0,
-        "formula": "",
-        "interpretations": {
-          "низкий": "Показатель находится в низком диапазоне, жалобы по шкале не выражены.",
-          "средний": "Средний уровень выраженности, клинически значимых проявлений нет.",
-          "повышенный": "Повышенные проявления, обратите внимание на содержание шкалы.",
-          "высокий": "Высокая выраженность признаков по шкале."
         }
       }
     ],
     "derived": [
       {
         "id": "D",
-        "name": "Личностный адаптивный потенциал (ЛАП)",
-        "group": "lap_integral",
+        "name": "Личностный адаптационный потенциал (ЛАП)",
+        "group": "lap",
         "components": [
           "A",
           "B",
           "C"
         ],
-        "max_score": 45,
+        "max_score": 143,
         "norms": {
           "kind": "sten",
           "table": [
             {
               "sten": 1,
-              "min": 0,
-              "max": 6,
-              "level": "ниже среднего"
+              "min": 58,
+              "max": 165,
+              "level": "группа 4"
             },
             {
               "sten": 2,
-              "min": 7,
-              "max": 10,
-              "level": "ниже среднего"
+              "min": 47,
+              "max": 57,
+              "level": "группа 4"
             },
             {
               "sten": 3,
-              "min": 11,
-              "max": 14,
-              "level": "ниже среднего"
+              "min": 40,
+              "max": 46,
+              "level": "группа 3"
             },
             {
               "sten": 4,
-              "min": 15,
-              "max": 19,
-              "level": "средний"
+              "min": 33,
+              "max": 39,
+              "level": "группа 3"
             },
             {
               "sten": 5,
-              "min": 20,
-              "max": 24,
-              "level": "средний"
+              "min": 27,
+              "max": 32,
+              "level": "группа 2"
             },
             {
               "sten": 6,
-              "min": 25,
-              "max": 29,
-              "level": "средний"
+              "min": 23,
+              "max": 26,
+              "level": "группа 2"
             },
             {
               "sten": 7,
-              "min": 30,
-              "max": 33,
-              "level": "средний"
+              "min": 18,
+              "max": 22,
+              "level": "группа 2"
             },
             {
               "sten": 8,
-              "min": 34,
-              "max": 37,
-              "level": "выше среднего"
+              "min": 15,
+              "max": 17,
+              "level": "группа 1"
             },
             {
               "sten": 9,
-              "min": 38,
-              "max": 41,
-              "level": "выше среднего"
+              "min": 12,
+              "max": 14,
+              "level": "группа 1"
             },
             {
               "sten": 10,
-              "min": 42,
-              "max": 45,
-              "level": "выше среднего"
+              "min": 1,
+              "max": 11,
+              "level": "группа 1"
             }
           ]
-        },
-        "interpretations": {
-          "ниже среднего": "Личностный адаптивный потенциал снижен; рекомендуется программа развития ресурсов.",
-          "средний": "ЛАП соответствует средним значениям, ресурсы в рабочем состоянии.",
-          "выше среднего": "Выраженный адаптивный потенциал, высокая устойчивость."
         }
       },
       {
         "id": "I",
-        "name": "Дезадаптационные нарушения",
-        "group": "maladaptation",
+        "name": "Дезадаптационные нарушения (ДАН)",
+        "group": "dan",
         "components": [
           "G",
           "H"
         ],
-        "max_score": 30,
+        "max_score": 76,
         "norms": {
           "kind": "sten",
           "table": [
             {
               "sten": 1,
-              "min": 0,
-              "max": 3,
-              "level": "ниже среднего"
+              "min": 51,
+              "max": 165,
+              "level": "выше среднего"
             },
             {
               "sten": 2,
-              "min": 4,
-              "max": 6,
-              "level": "ниже среднего"
+              "min": 43,
+              "max": 50,
+              "level": "выше среднего"
             },
             {
               "sten": 3,
-              "min": 7,
-              "max": 9,
-              "level": "ниже среднего"
+              "min": 36,
+              "max": 42,
+              "level": "выше среднего"
             },
             {
               "sten": 4,
-              "min": 10,
-              "max": 12,
+              "min": 31,
+              "max": 35,
               "level": "средний"
             },
             {
               "sten": 5,
-              "min": 13,
-              "max": 15,
+              "min": 21,
+              "max": 30,
               "level": "средний"
             },
             {
               "sten": 6,
               "min": 16,
-              "max": 18,
+              "max": 20,
               "level": "средний"
             },
             {
               "sten": 7,
-              "min": 19,
-              "max": 21,
+              "min": 11,
+              "max": 15,
               "level": "средний"
             },
             {
               "sten": 8,
-              "min": 22,
-              "max": 24,
-              "level": "выше среднего"
+              "min": 6,
+              "max": 10,
+              "level": "ниже среднего"
             },
             {
               "sten": 9,
-              "min": 25,
-              "max": 27,
-              "level": "выше среднего"
+              "min": 3,
+              "max": 5,
+              "level": "ниже среднего"
             },
             {
               "sten": 10,
-              "min": 28,
-              "max": 30,
-              "level": "выше среднего"
+              "min": 0,
+              "max": 2,
+              "level": "ниже среднего"
             }
           ]
-        },
-        "interpretations": {
-          "ниже среднего": "Признаков дезадаптации практически нет.",
-          "средний": "Есть допустимые признаки напряжения, требуются профилактические меры.",
-          "выше среднего": "Дезадаптация выражена, показаны поддерживающие интервенции."
         }
       }
     ],
-    "sten_level_map": {
-      "low": "ниже среднего",
-      "mid": "средний",
-      "high": "выше среднего"
-    },
     "summary_templates": {
-      "base": "ЛАП: {lap_level}. Дезадаптация: {mal_level}. Выраженные MMPI-пики: {mmpi_peaks}."
+      "base": "ЛАП: {lap_level}; ДАН: {mal_level}; пиковые MMPI: {mmpi_peaks}"
     }
   }
 }
