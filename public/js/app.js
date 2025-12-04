@@ -65,8 +65,7 @@ function renderQuestion(question, answers) {
     const noChecked = current === 'no' ? 'checked' : '';
     return createElement(`<div class="question">
         <div class="question-header">
-          <span class="badge neutral">Вопрос</span>
-          <p>${question.text}</p>
+          <span class="badge neutral">${question.text}</span>
         </div>
         <div class="options">
           <label class="option"><input type="radio" name="${question.id}" value="yes" ${yesChecked} required/>Да</label>
